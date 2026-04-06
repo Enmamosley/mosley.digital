@@ -3,7 +3,7 @@ title: "Tank Global Solution"
 subtitle: Sitio web corporativo para empresa líder en soluciones de tanques ISO con presencia internacional. Diseño profesional que refleja la solidez y alcance global de la marca.
 meta_title: "Tank Global Solution | Sitio Corporativo — Mosley Digital Services"
 description: "Sitio web corporativo para empresa internacional de tanques ISO. Diseño y desarrollo con Astro y Tailwind CSS."
-image: "/images/work/spark-layer/5.png"
+image: "/images/work/tank-global-solution/1.png"
 draft: false
 color_shape: "#10b981"
 project_info:
@@ -13,8 +13,8 @@ project_info:
   year: 2025
   link: "https://tankglobalsolution.com"
 project_gallery_images:
-  - "/images/work/spark-layer/5.png"
-  - "/images/work/spark-layer/6.png"
-  - "/images/work/spark-layer/3.png"
-  - "/images/work/spark-layer/4.png"
+  - "/images/work/tank-global-solution/1.png"
+  - "/images/work/tank-global-solution/2.png"
+  - "/images/work/tank-global-solution/3.png"
+  - "/images/work/tank-global-solution/4.png"
 ---
