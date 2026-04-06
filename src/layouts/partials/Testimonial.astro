@@ -1,0 +1,155 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import Title from "@/components/Title.astro";
+import ScrollAnimation from "@/helpers/ScrollAnimation";
+import { getListPage } from "@/lib/contentParser.astro";
+import { Swiper, SwiperSlide, SwiperWrapper } from "astro-swiper";
+import type { SwiperOptions } from "swiper/types";
+
+const sectionData = await getListPage("testimonialSection", "testimonial");
+if (!sectionData.data.enable) return null;
+
+const { title, testimonials, client_logos } = sectionData.data;
+const isHome = Astro.props.isHome || false;
+
+const swiperOptions: SwiperOptions = {
+  loop: true,
+  loopAdditionalSlides: 4,
+  autoplay: {
+    delay: 10000,
+    disableOnInteraction: false,
+  },
+  navigation: {
+    nextEl: ".testimonials-navigation-next",
+    prevEl: ".testimonials-navigation-prev",
+  },
+  speed: 1500,
+  spaceBetween: 24,
+  centeredSlides: true,
+  slidesPerView: 1,
+  pagination: {
+    el: ".testimonial-slider-pagination",
+    type: "bullets",
+    clickable: true,
+    dynamicBullets: false,
+  },
+  breakpoints: {
+    768: {
+      slidesPerView: 1.2,
+      spaceBetween: 24,
+    },
+    1262: {
+      slidesPerView: 2.2,
+      spaceBetween: 24,
+    },
+  },
+};
+---
+
+<section
+  class={`section ${!isHome ? "bg-gradient-tertiary rounded-4xl" : ""} `}
+>
+  <div class="container mb-4">
+    <div
+      class="flex justify-between flex-col md:flex-row items-center mb-12 md:mb-0"
+    >
+      <ScrollAnimation client:visible>
+        <Title title={title} classNames="md:text-left" />
+      </ScrollAnimation>
+      <div class="flex justify-center gap-4">
+        <button class="testimonials-navigation-prev button-grab-effect">
+          <ImageMod
+            src="/images/icons/testimonial-prev.svg"
+            width={58}
+            height={58}
+            alt="prev"
+            class="size-10 cursor-pointer"
+          />
+        </button>
+        <button class="testimonials-navigation-next button-grab-effect">
+          <ImageMod
+            src="/images/icons/testimonial-next.svg"
+            width={58}
+            height={58}
+            alt="next"
+            class="cursor-pointer size-10"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+  <ScrollAnimation client:visible>
+    <Swiper options={swiperOptions} class="testimonial-slider">
+      <SwiperWrapper>
+        {
+          [...testimonials, ...testimonials].map((item) => (
+            <SwiperSlide>
+              <div class="px-9 pt-9 pb-14 bg-light rounded-[28px] flex flex-col gap-y-25 h-full relative overflow-hidden">
+                <div class="flex justify-between">
+                  <div class="flex items-center gap-3">
+                    <ImageMod
+                      src={item.avatar}
+                      width={80}
+                      height={80}
+                      alt={item.name}
+                      class="w-20 h-20 rounded-full"
+                    />
+                    <div>
+                      <h5 class="font-semibold mb-2.5">{item.name}</h5>
+                      <p class="text-xl font-secondary italic text-text/70">
+                        {item.designation}
+                      </p>
+                    </div>
+                  </div>
+
+                  <ImageMod
+                    src={item.company_icon}
+                    width={80}
+                    height={80}
+                    alt={item.name + " company"}
+                    class="w-15 h-15 object-contain grayscale"
+                  />
+                </div>
+
+                <div class="flex justify-between items-center gap-x-8 relative z-2">
+                  <div class="w-2.5 bg-gradient-primary self-stretch rounded-2xl" />
+                  <blockquote class="text-3xl leading-tight">
+                    {item.content}
+                  </blockquote>
+                </div>
+
+                <ImageMod
+                  src="/images/icons/quote.svg"
+                  width={90}
+                  height={80}
+                  alt="quote"
+                  class="absolute sm:-bottom-6 -bottom-10 right-6"
+                />
+              </div>
+            </SwiperSlide>
+          ))
+        }
+      </SwiperWrapper>
+    </Swiper>
+    <div class="testimonial-slider-pagination mt-8 flex justify-center"></div>
+  </ScrollAnimation>
+
+  <div class="container pt-30">
+    <div class="flex flex-wrap justify-center items-center gap-20">
+      {
+        client_logos &&
+          client_logos.map((logo: string, index: number) => (
+            <div class="w-36 h-16 flex items-center">
+              <ImageMod
+                src={logo}
+                width={200}
+                height={64}
+                alt={`Client logo ${index + 1}`}
+                class="max-h-full max-w-full object-contain "
+              />
+            </div>
+          ))
+      }
+    </div>
+  </div>
+</section>

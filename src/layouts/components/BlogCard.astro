@@ -1,0 +1,40 @@
+---
+import config from "@/config/config.json";
+import dateFormat from "@/lib/utils/dateFormat";
+import ImageMod from "./ImageMod.astro";
+import { FaArrowRight } from "react-icons/fa6";
+
+const { blog_folder } = config.settings;
+const { data } = Astro.props;
+const { title, image, date } = data.data;
+const slug = data.id;
+---
+
+<a
+  href={`/${blog_folder}/${slug}`}
+  class="bg-light p-6 pb-0 rounded-[20px] flex flex-col gap-6 h-full group transition-all duration-500 overflow-hidden"
+>
+  <div>
+    <span class="py-1 px-3.5 inline-block border border-dark/30 rounded-full font-medium mb-4 text-text-dark">
+      {dateFormat(date || "")}
+    </span>
+    <h2 class="font-secondary text-h4 group-hover:text-primary mb-6 transition-all duration-500 italic font-normal -tracking-normal">
+      {title}
+    </h2>
+    <div class="bg-gradient-dark rounded-full size-10 flex items-center justify-center text-light text-2xl">
+      <FaArrowRight className="transition-all duration-500 group-hover:rotate-0 -rotate-45" />
+    </div>
+  </div>
+  <div class="w-full translate-y-1 overflow-hidden rounded-t-3xl relative h-55">
+    <div class="h-full w-[50%] absolute top-0 left-0 bg-dark/50 z-1 -translate-x-2/2 group-hover:translate-0 transition-all duration-500" />
+    <div class="h-full w-[50%] absolute top-0 right-0 bg-dark/50 z-1 translate-x-2/2 group-hover:translate-0 transition-all duration-500" />
+    <ImageMod
+      src={image}
+      alt={title}
+      width={400}
+      height={250}
+      class="w-full h-full rounded-t-3xl mb-6 group-hover:scale-100 scale-110 transition-all duration-500 object-cover"
+      loading="lazy"
+    />
+  </div>
+</a>

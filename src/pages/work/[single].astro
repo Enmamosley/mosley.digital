@@ -1,0 +1,127 @@
+---
+import Gallery from "@/components/functional-components/Gallery";
+import ImageMod from "@/components/ImageMod.astro";
+import ScrollAnimation from "@/helpers/ScrollAnimation";
+import Base from "@/layouts/Base.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import CallToAction from "@/partials/CallToAction.astro";
+
+export async function getStaticPaths() {
+  const workList = await getSinglePage("workSinglePage");
+
+  const paths = workList.map((work) => ({
+    params: {
+      single: work.id,
+    },
+    props: { work },
+  }));
+  return paths;
+}
+
+const { work } = Astro.props;
+const { title, subtitle, project_info, project_gallery_images } = work.data;
+---
+
+<Base {...work.data}>
+  <section class="pb-10 pt-40">
+    <div class="container">
+      <div class="grid lg:grid-cols-6 gap-8">
+        <div class="lg:col-span-2">
+          <ScrollAnimation client:visible delay={0.2}>
+            <div
+              class="bg-light p-8 xl:p-12 rounded-3xl sticky top-5 flex flex-col gap-y-15"
+            >
+              <div>
+                <h2 class="text-h2 xl:text-h1 mb-6">{title}</h2>
+                <p class="text-text-dark/80 leading-relaxed">
+                  {subtitle}
+                </p>
+              </div>
+
+              <ul class="text-xl flex flex-col gap-y-2">
+                <li
+                  class="flex items-center gap-2 pb-2 border-b-2 border-dark/40"
+                >
+                  <b>Cliente:</b>
+                  <span
+                    class="font-secondary italic font-light text-text-dark/90"
+                  >
+                    {project_info?.client}
+                  </span>
+                </li>
+                <li
+                  class="flex items-center gap-2 pb-2 border-b-2 border-dark/40"
+                >
+                  <b>Rol:</b>
+                  <span
+                    class="font-secondary italic font-light text-text-dark/90"
+                  >
+                    {project_info?.role?.join(", ")}
+                  </span>
+                </li>
+                <li
+                  class="flex items-center gap-2 pb-2 border-b-2 border-dark/40"
+                >
+                  <b>Ubicación:</b>
+                  <span
+                    class="font-secondary italic font-light text-text-dark/90"
+                  >
+                    {project_info?.recognition}
+                  </span>
+                </li>
+                <li class={`flex items-center gap-2${project_info?.link ? ' pb-2 border-b-2 border-dark/40' : ''}`}>
+                  <b>Año:</b>
+                  <span
+                    class="font-secondary italic font-light text-text-dark/90"
+                  >
+                    {project_info?.year}
+                  </span>
+                </li>
+                {project_info?.link && (
+                  <li class="flex items-center gap-2">
+                    <b>Sitio:</b>
+                    <a
+                      href={project_info.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="font-secondary italic font-light text-blue-600 hover:underline"
+                    >
+                      Ver en vivo
+                    </a>
+                  </li>
+                )}
+              </ul>
+            </div>
+          </ScrollAnimation>
+        </div>
+
+        <div class="lg:col-span-4">
+          <ScrollAnimation client:visible delay={0.1}>
+            <Gallery client:load>
+              <div class="flex flex-col gap-6">
+                {
+                  project_gallery_images?.map((imageSrc) => (
+                    <a
+                      href={imageSrc}
+                      class="glightbox overflow-hidden rounded-3xl"
+                      data-gallery="work-gallery"
+                    >
+                      <ImageMod
+                        src={imageSrc}
+                        alt={title}
+                        width={800}
+                        height={600}
+                        class="w-full h-auto rounded-3xl cursor-pointer hover:opacity-90 transition-opacity"
+                      />
+                    </a>
+                  ))
+                }
+              </div>
+            </Gallery>
+          </ScrollAnimation>
+        </div>
+      </div>
+    </div>
+  </section>
+  <CallToAction />
+</Base>

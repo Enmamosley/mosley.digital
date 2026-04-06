@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ImageMod from "./ImageMod.astro";
+
+type Props = {
+  work: CollectionEntry<"workSinglePage">;
+};
+
+const { work } = Astro.props;
+---
+
+<a
+  href={`work/${work.id}`}
+  class="p-4 pt-7 bg-light rounded-3xl flex flex-col gap-6 relative overflow-hidden will-change-transform"
+>
+  <div
+    class={` rounded-full blur-[100px] opacity-70 size-73 -top-16.75 -right-19.25 absolute overflow-clip z-1`}
+    style={{ backgroundColor: work.data.color_shape }}
+  >
+  </div>
+  <div class="flex flex-col gap-4 relative z-2 pl-5">
+    <h3 class="font-normal">{work.data.title}</h3>
+    <ul class="flex gap-2">
+      {
+        work.data.project_info?.role.map((roleItem) => (
+          <li class="bg-linear-to-b from-light to-light badge-shadow inline-block rounded-full py-1.5 px-3.5">
+            {roleItem}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  {
+    work.data.image && (
+      <div class="relative z-2 overflow-hidden rounded-2xl">
+        <ImageMod
+          src={work.data.image}
+          alt={work.data.title}
+          width={1000}
+          height={700}
+          class="w-full h-120 rounded-2xl object-cover will-change-transform hover:scale-[1.3] hover:rotate-[-10deg] transition-transform duration-700"
+          loading="lazy"
+        />
+      </div>
+    )
+  }
+</a>

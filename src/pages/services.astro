@@ -1,0 +1,41 @@
+---
+import FeatureCard from "@/components/FeatureCard.astro";
+import ScrollAnimation from "@/helpers/ScrollAnimation";
+import Base from "@/layouts/Base.astro";
+import { getListPage } from "@/lib/contentParser.astro";
+import CallToAction from "@/partials/CallToAction.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+import Testimonial from "@/partials/Testimonial.astro";
+
+const pageIndex = await getListPage("servicesListPage", "-index");
+if (pageIndex.data.draft) {
+  return Astro.redirect("/404");
+}
+
+const featuresSection = await getListPage("featuresSection", "features");
+
+const { title, page_header } = pageIndex.data;
+---
+
+<Base {...pageIndex.data}>
+  <PageHeader title={page_header?.title || title} badge={page_header?.badge} />
+
+  {
+    featuresSection.data.enable && (
+      <section class="pb-24">
+        <div class="container">
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {featuresSection.data.features.map((feature, index) => (
+              <ScrollAnimation client:visible delay={0.2 + index * 0.1}>
+                <FeatureCard index={index} feature={feature} />
+              </ScrollAnimation>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <Testimonial />
+  <CallToAction />
+</Base>

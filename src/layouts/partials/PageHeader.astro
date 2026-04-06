@@ -1,0 +1,30 @@
+---
+import Badge from "@/components/Badge.astro";
+import ScrollAnimation from "@/helpers/ScrollAnimation";
+import { markdownify } from "@/lib/utils/textConverter";
+interface Props {
+  title: string;
+  subtitle?: string;
+  badge?: string;
+}
+const { title, subtitle, badge }: Props = Astro.props;
+---
+
+<section class="pt-45 pb-10">
+  <div class="container">
+    <ScrollAnimation client:visible delay={0.2}>
+      <div class="flex flex-col items-center justify-center">
+        {badge && <Badge>{badge}</Badge>}
+        <h1
+          set:html={markdownify(title)}
+          class="hero-title text-center mt-8 mb-6 leading-none!"
+        />
+        {
+          subtitle && (
+            <p class="text-xl text-text-dark text-center">{subtitle}</p>
+          )
+        }
+      </div>
+    </ScrollAnimation>
+  </div>
+</section>

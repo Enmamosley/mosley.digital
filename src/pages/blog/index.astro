@@ -1,0 +1,38 @@
+---
+import BlogList from "@/components/functional-components/BlogList";
+import Base from "@/layouts/Base.astro";
+import { getListPage, getSinglePage } from "@/lib/contentParser.astro";
+import { sortByDate } from "@/lib/utils/sortFunctions";
+import CallToAction from "@/partials/CallToAction.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+import type { CollectionEntry } from "astro:content";
+
+const pageIndex: CollectionEntry<"blogListPage"> = await getListPage(
+  "blogListPage",
+  "-index",
+);
+
+if (pageIndex.data.draft) {
+  return Astro.redirect("/404");
+}
+
+const posts = await getSinglePage("blogSinglePage");
+const sortedPosts = sortByDate(posts);
+
+const { title, page_header } = pageIndex.data;
+---
+
+<Base {...pageIndex.data}>
+  <PageHeader
+    title={page_header?.title || title}
+    badge={page_header?.badge || "Blog"}
+  />
+
+  <section class="pt-8">
+    <div class="container">
+      <BlogList client:load posts={sortedPosts} />
+    </div>
+  </section>
+
+  <CallToAction />
+</Base>

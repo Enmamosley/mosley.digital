@@ -1,0 +1,11 @@
+{
+  // Cloudflare Workers — Static Assets deployment
+  // Deploy:  npm run deploy:cf-workers
+  // Preview: npm run preview:cf-workers
+  "name": "hyperbit-astro",
+  "compatibility_date": "2026-03-09",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+  },
+}

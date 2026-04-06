@@ -1,0 +1,93 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import Title from "@/components/Title.astro";
+import WorkCard from "@/components/WorkCard.astro";
+import ScrollAnimation from "@/helpers/ScrollAnimation";
+import { Swiper, SwiperSlide, SwiperWrapper } from "astro-swiper";
+import type { CollectionEntry } from "astro:content";
+import type { SwiperOptions } from "swiper/types";
+
+type Props = {
+  work: CollectionEntry<"workSinglePage">[];
+  data: CollectionEntry<"homePage">["data"]["recent_work"];
+};
+
+const { work, data }: Props = Astro.props;
+if (!data.enable) return null;
+
+const swiperOptions: SwiperOptions = {
+  loop: true,
+  loopAdditionalSlides: 4,
+  autoplay: {
+    delay: 10000,
+    disableOnInteraction: false,
+  },
+  navigation: {
+    nextEl: ".work-navigation-next",
+    prevEl: ".work-navigation-prev",
+  },
+  speed: 1500,
+  spaceBetween: 24,
+  centeredSlides: true,
+  slidesPerView: 1,
+  breakpoints: {
+    768: {
+      slidesPerView: 1.2,
+      spaceBetween: 24,
+    },
+    1262: {
+      slidesPerView: 2.2,
+      spaceBetween: 24,
+    },
+  },
+};
+---
+
+<section class={`section`}>
+  <div class="container">
+    <div
+      class="flex justify-between flex-col md:flex-row items-center mb-12 md:mb-0"
+    >
+      <ScrollAnimation client:visible>
+        <Title title={data.title} classNames="md:text-left" />
+      </ScrollAnimation>
+      <div class="flex justify-center gap-4">
+        <button class="work-navigation-prev button-grab-effect">
+          <ImageMod
+            src="/images/icons/testimonial-prev.svg"
+            width={58}
+            height={58}
+            alt="prev"
+            class="size-10 cursor-pointer"
+            loading="lazy"
+          />
+        </button>
+        <button class="work-navigation-next button-grab-effect">
+          <ImageMod
+            src="/images/icons/testimonial-next.svg"
+            width={58}
+            height={58}
+            alt="next"
+            class="cursor-pointer size-10"
+            loading="lazy"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+  <ScrollAnimation client:visible>
+    <div class="work">
+      <Swiper options={swiperOptions} class="work-slider">
+        <SwiperWrapper>
+          {
+            [...work, ...work, ...work].map((item) => (
+              <SwiperSlide>
+                <WorkCard work={item} />
+              </SwiperSlide>
+            ))
+          }
+        </SwiperWrapper>
+      </Swiper>
+    </div>
+  </ScrollAnimation>
+</section>

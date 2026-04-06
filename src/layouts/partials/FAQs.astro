@@ -1,0 +1,37 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import Title from "@/components/Title.astro";
+import FaqAccordion from "@/components/functional-components/FaqAccordion";
+import ScrollAnimation from "@/helpers/ScrollAnimation";
+import { getListPage } from "@/lib/contentParser.astro";
+
+const sectionData = await getListPage("faqsSection", "faqs");
+if (!sectionData.data.enable) return null;
+
+const { title, faqs_list } = sectionData.data;
+---
+
+<section class="section bg-light rounded-[60px] relative overflow-hidden">
+  <ImageMod
+    src="/images/shapes/dark-grid-box.png"
+    alt="shape"
+    class="size-full absolute inset-0 z-1 object-cover object-center"
+    width={1920}
+    height={1080}
+  />
+  <div
+    class="absolute inset-0 size-full bg-linear-to-b from-light via-body via-[6.98%] to-[#4394FF] z-0"
+  >
+  </div>
+  <div class="container relative z-2">
+    <ScrollAnimation client:visible>
+      <Title title={title} />
+    </ScrollAnimation>
+
+    <div
+      class="max-w-190 mx-auto bg-body p-7 rounded-3xl flex flex-col gap-y-6"
+    >
+      <FaqAccordion client:visible faqs={faqs_list} />
+    </div>
+  </div>
+</section>

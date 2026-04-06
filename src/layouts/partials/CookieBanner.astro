@@ -1,0 +1,57 @@
+<div
+  id="cookie-banner"
+  class="fixed bottom-4 left-1/2 z-50 w-[calc(100%-2rem)] max-w-3xl -translate-x-1/2 rounded-2xl bg-dark text-light px-5 py-4 shadow-xl hidden"
+>
+  <p class="text-sm leading-relaxed">
+    Usamos cookies de analitica para mejorar tu experiencia. Puedes aceptar o rechazar el uso de cookies no esenciales.
+  </p>
+  <div class="mt-3 flex flex-wrap gap-3">
+    <button
+      id="cookie-accept"
+      type="button"
+      class="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-light"
+    >
+      Aceptar
+    </button>
+    <button
+      id="cookie-reject"
+      type="button"
+      class="rounded-full border border-light/40 px-4 py-2 text-sm font-semibold"
+    >
+      Rechazar
+    </button>
+    <a href="/privacy" class="text-sm underline underline-offset-2 ml-auto">
+      Mas informacion
+    </a>
+  </div>
+</div>
+
+<script>
+  const CONSENT_KEY = "mosley_cookie_consent";
+
+  function initCookieBanner() {
+    const banner = document.getElementById("cookie-banner");
+    const accept = document.getElementById("cookie-accept");
+    const reject = document.getElementById("cookie-reject");
+
+    if (!banner || !accept || !reject) return;
+
+    const current = localStorage.getItem(CONSENT_KEY);
+    if (!current) {
+      banner.classList.remove("hidden");
+    }
+
+    accept.addEventListener("click", () => {
+      localStorage.setItem(CONSENT_KEY, "accepted");
+      banner.classList.add("hidden");
+    });
+
+    reject.addEventListener("click", () => {
+      localStorage.setItem(CONSENT_KEY, "rejected");
+      banner.classList.add("hidden");
+    });
+  }
+
+  initCookieBanner();
+  document.addEventListener("astro:after-swap", initCookieBanner);
+</script>

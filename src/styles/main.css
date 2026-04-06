@@ -1,0 +1,57 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Auto-generated theme from "theme.json"*/
+@import "./generated-theme.css";
+
+@theme {
+  --background-image-gradient-primary: linear-gradient(
+    rgb(96, 60, 255) 0%,
+    rgb(255, 71, 96) 50.0984%,
+    rgb(255, 131, 64) 100%
+  );
+  --background-image-gradient-secondary: linear-gradient(
+    284deg,
+    rgb(255, 131, 64) 0%,
+    rgb(255, 71, 96) 51.2237%,
+    rgb(96, 60, 255) 100%
+  );
+
+  --background-image-gradient-dark: linear-gradient(
+    rgb(109, 109, 109) 0%,
+    rgb(23, 23, 23) 100%
+  );
+  --background-image-gradient-light: linear-gradient(
+    rgb(255, 255, 255) 0%,
+    rgb(228, 219, 255) 100%
+  );
+  --background-image-gradient-secondary-light: linear-gradient(
+    180deg,
+    #fff 0%,
+    #fffc 25%,
+    #8791ff 100%
+  );
+  --background-image-gradient-secondary-lighter: linear-gradient(
+    rgb(255, 255, 255) 0%,
+    rgb(199, 203, 255) 100%
+  );
+  --background-image-gradient-tertiary: linear-gradient(
+    rgb(255, 255, 255) 31%,
+    rgb(255, 167, 91) 100%
+  );
+}
+
+@import "./safe.css";
+@import "./utilities.css";
+
+@layer base {
+  @import "./base.css";
+}
+
+@layer components {
+  @import "./components.css";
+  @import "./navigation.css";
+  @import "./buttons.css";
+}

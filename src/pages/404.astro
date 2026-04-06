@@ -1,0 +1,33 @@
+---
+import IconButton from "@/components/functional-components/IconButton";
+import ImageMod from "@/components/ImageMod.astro";
+import ScrollAnimation from "@/helpers/ScrollAnimation";
+import Base from "@/layouts/Base.astro";
+import CallToAction from "@/partials/CallToAction.astro";
+---
+
+<Base title="Page Not Found">
+  <section class="pt-50 text-center">
+    <div class="container">
+      <ScrollAnimation client:visible>
+        <ImageMod
+          src="/images/404.png"
+          width={1024}
+          height={650}
+          alt="404 Not Found"
+          class="mx-auto w-160 mb-8"
+        />
+        <div class="mt-12">
+          <h1 class="text-center mb-6">Page Not Found!</h1>
+          <p class="text-center text-xl text-text-dark mb-8">
+            We're Sorry, But the page you're Looking for doesn't exist
+          </p>
+          <IconButton client:visible href="/" variant="filled">
+            Back Home
+          </IconButton>
+        </div>
+      </ScrollAnimation>
+    </div>
+  </section>
+  <CallToAction />
+</Base>

@@ -1,0 +1,177 @@
+---
+import IconButton from "@/components/functional-components/IconButton";
+import Logo from "@/components/Logo.astro";
+import config from "@/config/config.json";
+import menu from "@/config/menu.json";
+import { FaPhone } from "react-icons/fa6";
+
+export interface ChildNavigationLink {
+  name: string;
+  url: string;
+}
+
+export interface NavigationLink {
+  name: string;
+  url: string;
+  hasChildren?: boolean;
+  children?: ChildNavigationLink[];
+}
+
+const { main }: { main: NavigationLink[] } = menu;
+const { navigation_button, settings } = config;
+const { pathname } = Astro.url;
+---
+
+<header
+  class={`header z-30 absolute top-8 transition-all duration-1000 ease-in-out ${
+    settings.sticky_header && "fixed w-full"
+  }`}
+  id="main-header"
+>
+  <nav class="navbar">
+    <!-- logo -->
+    <div class="order-0 flex items-center">
+      <Logo />
+    </div>
+    <!-- navbar toggler -->
+    <input id="nav-toggle" type="checkbox" class="hidden" />
+    <label
+      for="nav-toggle"
+      class="order-3 cursor-pointer flex items-center md:hidden text-text-dark md:order-1 pr-2 md:pr-0"
+    >
+      <svg id="show-button" class="h-8 fill-current block" viewBox="0 0 20 20">
+        <title>Menu Open</title>
+        <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
+      </svg>
+      <svg id="hide-button" class="h-8 fill-current hidden" viewBox="0 0 20 20">
+        <title>Menu Close</title>
+        <polygon
+          points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
+          transform="rotate(45 10 10)"></polygon>
+      </svg>
+    </label>
+    <!-- /navbar toggler -->
+    <ul
+      id="nav-menu"
+      class="navbar-nav order-3 hidden w-full pb-6 md:order-1 md:flex md:gap-x-3 md:items-center md:w-auto md:pb-0 md:flex-row flex-col gap-y-4"
+    >
+      {
+        main.map((menu) => (
+          <>
+            {menu.hasChildren ? (
+              <li class="nav-item nav-dropdown group relative">
+                <input
+                  type="checkbox"
+                  id={`submenu-${menu.name}`}
+                  class="peer hidden md:hidden"
+                />
+                <label
+                  for={`submenu-${menu.name}`}
+                  class={`nav-link inline-flex items-center ${
+                    menu.children?.map(({ url }) => url).includes(pathname) ||
+                    menu.children
+                      ?.map(({ url }) => `${url}/`)
+                      .includes(pathname)
+                      ? "active"
+                      : ""
+                  }`}
+                >
+                  {menu.name}
+                  <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                  </svg>
+                </label>
+                <div class="pt-7 hidden peer-checked:block md:block md:absolute md:opacity-0 md:group-hover:opacity-100 md:transition-all md:duration-500 md:ease-in-out md:origin-top md:translate-y-2 md:group-hover:translate-y-0 md:pointer-events-none md:group-hover:pointer-events-auto">
+                  <ul class="nav-dropdown-list">
+                    {menu.children?.map((child) => (
+                      <li class="nav-dropdown-item">
+                        <a
+                          href={child.url}
+                          aria-label={child.name}
+                          class={`nav-dropdown-link block ${
+                            (pathname === `${child.url}/` ||
+                              pathname === child.url) &&
+                            "active"
+                          }`}
+                        >
+                          {child.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ) : (
+              <>
+                <li class="hidden md:inline-block bg-dark size-0.75 rounded-full" />
+                <li class="nav-item">
+                  <a
+                    href={menu.url}
+                    class={`nav-link block ${
+                      (pathname === `${menu.url}/` || pathname === menu.url) &&
+                      "active"
+                    }`}
+                  >
+                    {menu.name}
+                  </a>
+                </li>
+              </>
+            )}
+          </>
+        ))
+      }
+      {
+        navigation_button.enable && (
+          <li class="mt-4 inline-block md:hidden">
+            <IconButton client:visible href={navigation_button.link}>
+              {navigation_button.label}
+            </IconButton>
+          </li>
+        )
+      }
+    </ul>
+    <div class="order-1 ml-auto flex items-center md:order-2 md:ml-0">
+      {
+        navigation_button.enable && (
+          <div class="hidden md:inline-flex md:items-center">
+            <IconButton href={navigation_button.link}>
+              <FaPhone />
+              {navigation_button.label}
+            </IconButton>
+          </div>
+        )
+      }
+    </div>
+  </nav>
+</header>
+
+<script>
+  function initHeaderScroll() {
+    const header = document.getElementById("main-header");
+    if (!header) return;
+
+    let lastScrollY = 0;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY < lastScrollY || currentScrollY < 20) {
+        header.classList.remove("-translate-y-40", "opacity-0");
+        header.classList.add("translate-y-0", "opacity-100");
+      } else if (currentScrollY > lastScrollY && currentScrollY > 20) {
+        header.classList.add("-translate-y-40", "opacity-0");
+        header.classList.remove("translate-y-0", "opacity-100");
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+  }
+
+  // Run on initial load
+  initHeaderScroll();
+
+  // Re-run after Astro View Transitions navigation
+  document.addEventListener("astro:after-swap", initHeaderScroll);
+</script>

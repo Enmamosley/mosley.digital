@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://mosley.digital
+
+# Sitemaps
+Sitemap: https://mosley.digital/sitemap.xml

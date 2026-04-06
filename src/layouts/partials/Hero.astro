@@ -1,0 +1,62 @@
+---
+import Badge from "@/components/Badge.astro";
+import IconButton from "@/components/functional-components/IconButton";
+import GridImage from "@/components/GridImage.astro";
+import HeroFeaturedCards from "@/components/functional-components/HeroFeaturedCards";
+import DynamicIcon from "@/helpers/DynamicIcon";
+import ScrollAnimation from "@/helpers/ScrollAnimation";
+import { markdownify } from "@/lib/utils/textConverter";
+
+const { banner, features } = Astro.props;
+---
+
+<section
+  class="relative pt-50 rounded-b-[60px] overflow-hidden min-h-max bg-linear-to-r from-secondary/10 to-body pb-16 md:pb-0"
+>
+  <GridImage />
+
+  {/* secondary blur shape */}
+  <div
+    class="absolute -bottom-16.75 -left-98 z-1 flex-none aspect-square w-196.25 h-196.25 bg-secondary/20 rounded-full blur-[100px] mix-blend-multiply overflow-clip will-change-transform"
+  >
+  </div>
+
+  {/* tertiary blur shape */}
+  <div
+    class="absolute -bottom-16.75 -right-98 z-0 flex-none aspect-square w-196.25 h-196.25 bg-tertiary/20 rounded-full blur-[100px] mix-blend-multiply overflow-clip will-change-transform"
+  >
+  </div>
+
+  {/* top blur shape */}
+  <div
+    class="absolute -top-108 left-1/2 -translate-x-1/2 z-1 flex-none aspect-square w-219 h-219 bg-quaternary/20 rounded-full blur-[100px] mix-blend-hue opacity-60 overflow-clip will-change-transform"
+  >
+  </div>
+
+  <div class="container relative z-4">
+    {/* Banner */}
+    <ScrollAnimation client:visible delay={0.4}>
+      <div class="flex flex-col justify-center items-center pb-28">
+        <Badge>{banner.badge}</Badge>
+
+        <h1
+          set:html={markdownify(banner.title)}
+          class="hero-title text-center mt-14 mb-10"
+        />
+
+        <p class="text-xl text-text-dark mb-8">{banner.content}</p>
+
+        {
+          banner.button.enable && (
+            <IconButton client:visible href={banner.button.link}>
+              <DynamicIcon icon={banner.button.icon!} />
+              {banner.button.label}
+            </IconButton>
+          )
+        }
+      </div>
+    </ScrollAnimation>
+
+    <HeroFeaturedCards client:visible features={features} />
+  </div>
+</section>

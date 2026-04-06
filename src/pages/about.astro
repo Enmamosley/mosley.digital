@@ -1,0 +1,149 @@
+---
+import FeatureCard from "@/components/FeatureCard.astro";
+import ImageMod from "@/components/ImageMod.astro";
+import ScrollAnimation from "@/helpers/ScrollAnimation";
+import Base from "@/layouts/Base.astro";
+import { getListPage } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import CallToAction from "@/partials/CallToAction.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+import TeamSwiper from "@/partials/TeamSwiper.astro";
+
+const pageIndex = await getListPage("aboutPage", "-index");
+if (pageIndex.data.draft) {
+  return Astro.redirect("/404");
+}
+
+const featuresSection = await getListPage("featuresSection", "features");
+
+const { page_header, gallery_list, our_story, team_members } = pageIndex.data;
+---
+
+<Base {...pageIndex.data}>
+  <PageHeader
+    title={page_header?.title || ""}
+    subtitle={page_header?.subtitle}
+    badge={page_header?.badge}
+  />
+
+  <!-- Gallery Marquee -->
+  <div class="relative overflow-hidden py-12">
+    <div class="flex animate-marquee">
+      {
+        gallery_list &&
+          [...gallery_list, ...gallery_list].map((img, index) => (
+            <div class="shrink-0 px-2 sm:px-4">
+              <ImageMod
+                src={img}
+                alt={`Gallery image ${index + 1}`}
+                width={1400}
+                height={1000}
+                class="w-75 sm:w-100 xl:w-200 h-50 sm:h-75 xl:h-150 object-cover rounded-xl sm:rounded-3xl"
+              />
+            </div>
+          ))
+      }
+    </div>
+  </div>
+
+  <!-- Our Story Section -->
+  {
+    our_story?.enable && (
+      <section class="section bg-gradient-secondary-lighter rounded-[60px] relative overflow-hidden">
+        <ImageMod
+          src="/images/shapes/light-grid-box.png"
+          alt="shape"
+          width={2048}
+          height={998}
+          class="absolute bottom-0 w-full h-242.75 object-cover opacity-15"
+        />
+        <div class="container relative z-1">
+          <ScrollAnimation client:visible>
+            <h2
+              set:html={markdownify(our_story.title)}
+              class="has-em text-h1 lg:text-[80px] text-center leading-none mb-8"
+            />
+          </ScrollAnimation>
+
+          <div class="grid md:grid-cols-2 gap-40 items-center">
+            <ImageMod
+              src={our_story.story.image}
+              alt="Our Story Image"
+              width={600}
+              height={400}
+              class="w-full h-auto"
+            />
+            <div>
+              <h3 class="text-h2 mb-12">{our_story.story.title}</h3>
+              <div
+                set:html={markdownify(our_story.story.content)}
+                class="font-light text-2xl mb-14"
+              />
+
+              <div class="grid sm:grid-cols-3 gap-10">
+                <div class="text-center">
+                  <h4 class="analytics-title">
+                    {our_story.story.years_experience.prefix}
+                    {our_story.story.years_experience.number.toLocaleString()}
+                    {our_story.story.years_experience.suffix}
+                  </h4>
+                  <span class="text-sm uppercase font-semibold">
+                    {our_story.story.years_experience.text}
+                  </span>
+                </div>
+                <div class="text-center">
+                  <h4 class="analytics-title">
+                    {our_story.story.projects_completed.prefix}
+                    {our_story.story.projects_completed.number.toLocaleString()}
+                    {our_story.story.projects_completed.suffix}
+                  </h4>
+                  <span class="text-sm uppercase font-semibold">
+                    {our_story.story.projects_completed.text}
+                  </span>
+                </div>
+                <div class="text-center">
+                  <h4 class="analytics-title">
+                    {our_story.story.awards_won.prefix}
+                    {our_story.story.awards_won.number.toLocaleString()}
+                    {our_story.story.awards_won.suffix}
+                  </h4>
+                  <span class="text-sm uppercase font-semibold">
+                    {our_story.story.awards_won.text}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {featuresSection.data.enable && (
+            <div class="mt-32">
+              <ScrollAnimation client:visible>
+                <h2
+                  class="text-center section-title text-h1 mb-12"
+                  set:html={markdownify(featuresSection.data.title)}
+                />
+              </ScrollAnimation>
+
+              <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                {featuresSection.data.features.map((feature, indexNum) => (
+                  <ScrollAnimation
+                    client:visible
+                    delay={indexNum * 0.1}
+                    stagger={indexNum}
+                  >
+                    <FeatureCard index={indexNum} feature={feature} />
+                  </ScrollAnimation>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Team Section -->
+  {team_members.enable && <TeamSwiper team_members={team_members} />}
+
+  <CallToAction />
+</Base>

@@ -1,0 +1,104 @@
+---
+import TeamCard from "@/components/TeamCard.astro";
+import ImageMod from "@/components/ImageMod.astro";
+import ScrollAnimation from "@/helpers/ScrollAnimation";
+import { Swiper, SwiperSlide, SwiperWrapper } from "astro-swiper";
+import type { SwiperOptions } from "swiper/types";
+
+interface SocialLink {
+  name: string;
+  url: string;
+  icon: string;
+}
+
+interface Member {
+  name: string;
+  position: string;
+  image: string;
+  social_links: SocialLink[];
+}
+
+interface Props {
+  team_members: {
+    enable: boolean;
+    title: string;
+    list: Member[];
+  };
+}
+
+const { team_members }: Props = Astro.props;
+if (!team_members.enable) return null;
+
+const swiperOptions: SwiperOptions = {
+  loop: true,
+  autoplay: {
+    delay: 10000,
+    disableOnInteraction: false,
+  },
+  navigation: {
+    nextEl: ".team-navigation-next",
+    prevEl: ".team-navigation-prev",
+  },
+  speed: 1500,
+  spaceBetween: 24,
+  centeredSlides: true,
+  slidesPerView: 1,
+  breakpoints: {
+    768: {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    1262: {
+      slidesPerView: 3,
+      spaceBetween: 20,
+    },
+  },
+};
+---
+
+<section class="section">
+  <div class="container">
+    <div class="flex justify-between flex-col md:flex-row items-center mb-12">
+      <ScrollAnimation client:visible>
+        <h2
+          class="text-h1 section-title"
+          set:html={team_members.title}
+        />
+      </ScrollAnimation>
+      <div class="flex justify-center gap-4">
+        <button class="team-navigation-prev button-grab-effect">
+          <ImageMod
+            src="/images/icons/testimonial-prev.svg"
+            width={58}
+            height={58}
+            alt="prev"
+            class="size-15 cursor-pointer"
+          />
+        </button>
+        <button class="team-navigation-next button-grab-effect">
+          <ImageMod
+            src="/images/icons/testimonial-next.svg"
+            width={58}
+            height={58}
+            alt="next"
+            class="cursor-pointer size-15"
+          />
+        </button>
+      </div>
+    </div>
+
+    <ScrollAnimation client:visible>
+      <Swiper options={swiperOptions} class="team-slider">
+        <SwiperWrapper>
+          {
+            [...team_members.list, ...team_members.list].map((member) => (
+              <SwiperSlide>
+                <TeamCard member={member} />
+              </SwiperSlide>
+            ))
+          }
+        </SwiperWrapper>
+      </Swiper>
+    </ScrollAnimation>
+  </div>
+</section>

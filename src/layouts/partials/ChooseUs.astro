@@ -1,0 +1,54 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import Title from "@/components/Title.astro";
+import ScrollAnimation from "@/helpers/ScrollAnimation";
+
+type FeaturedItem = {
+  title: string;
+  content: string;
+  icon: string;
+};
+
+type Props = {
+  data: {
+    title: string;
+    featured_list: FeaturedItem[];
+  };
+};
+
+const { data }: Props = Astro.props;
+const { title, featured_list } = data;
+---
+
+<section class="section">
+  <div class="container">
+    <ScrollAnimation client:visible>
+      <Title title={title} />
+    </ScrollAnimation>
+    <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
+      {
+        featured_list.map((feature, index) => (
+          <ScrollAnimation
+            client:visible
+            stagger={index + 1}
+            delay={index * 0.2}
+          >
+            <div class="rounded-4xl bg-light py-10 px-8 flex flex-col gap-y-12 text-center justify-center items-center h-full">
+              <ImageMod
+                src={feature.icon}
+                width={250}
+                height={250}
+                alt={feature.title}
+                class="w-40 h-auto mb-6 animate-up-down will-change-transform"
+              />
+              <div>
+                <h3 class="text-h4 mb-6">{feature.title}</h3>
+                <p class="text-xl text-text-dark">{feature.content}</p>
+              </div>
+            </div>
+          </ScrollAnimation>
+        ))
+      }
+    </div>
+  </div>
+</section>

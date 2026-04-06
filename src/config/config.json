@@ -1,0 +1,49 @@
+{
+  "site": {
+    "title": "Mosley Digital Services",
+    "base_url": "https://mosley.digital",
+    "base_path": "/",
+    "trailing_slash": false,
+    "favicon": "/images/favicon.png",
+    "logo": "/images/logo.png",
+    "logo_width": "136",
+    "logo_height": "44",
+    "logo_text": "Mosley Digital"
+  },
+
+  "settings": {
+    "sticky_header": true,
+    "pagination": 3,
+    "blog_folder": "blog"
+  },
+
+  "params": {
+    "contact_form_action": "https://app.mosley.digital/api/contact",
+    "mail": "hola@mosley.digital",
+    "phone": "+52 81 2506 0903",
+    "copyright": "© 2026 Mosley Digital Services. Todos los derechos reservados."
+  },
+
+  "navigation_button": {
+    "enable": true,
+    "label": "Área de clientes",
+    "link": "https://app.mosley.digital"
+  },
+
+  "google_tag_manager": {
+    "enable": true,
+    "gtm_id": "GTM-XXXXXX"
+  },
+
+  "disqus": {
+    "enable": false,
+    "shortname": "themefisher-template",
+    "settings": {}
+  },
+
+  "metadata": {
+    "meta_author": "Mosley Digital Services",
+    "meta_image": "images/og-image.png",
+    "meta_description": "Agencia de desarrollo web en Mexico. Creamos sitios corporativos, ecommerce, landing pages y web apps orientadas a conversion para pymes y marcas en crecimiento."
+  }
+}

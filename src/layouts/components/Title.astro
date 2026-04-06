@@ -1,0 +1,10 @@
+---
+import { markdownify } from "@/lib/utils/textConverter";
+
+const { title, classNames } = Astro.props;
+---
+
+<h2
+  class={`text-center gradient-text sm:text-h1 mb-8 ${classNames}`}
+  set:html={markdownify(title)}
+/>

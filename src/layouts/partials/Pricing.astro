@@ -1,0 +1,250 @@
+---
+import IconButton from "@/components/functional-components/IconButton";
+import ImageMod from "@/components/ImageMod.astro";
+import Title from "@/components/Title.astro";
+import ScrollAnimation from "@/helpers/ScrollAnimation";
+import { getListPage } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import { FaCheck, FaPhone, FaUsers } from "react-icons/fa6";
+
+const sectionData = await getListPage("pricingSection", "pricing");
+if (!sectionData.data.enable) return null;
+
+const { title, pricing_list, book_a_call } = sectionData.data;
+---
+
+<section
+  class="section pb-0 bg-light rounded-[60px] relative overflow-hidden"
+  id="pricing"
+>
+  <ImageMod
+    src="/images/shapes/dark-grid-box.png"
+    alt="shape"
+    class="size-full absolute inset-0 z-1 object-cover object-center"
+    width={1920}
+    height={1080}
+  />
+  <div
+    class="absolute inset-0 size-full bg-linear-to-b from-light via-body via-[6.98%] to-tertiary z-0"
+  >
+  </div>
+  <div class="container relative z-2">
+    <ScrollAnimation client:visible>
+      <Title title={title} />
+    </ScrollAnimation>
+
+    <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-8">
+      {
+        pricing_list.map((plan, index) => (
+          <div
+            class={`rounded-[28px] p-6 relative overflow-hidden bg-linear-to-br from-[#faf4ff] via-[#faf4ff] to-[#cfd3ff]`}
+          >
+            {/* linear */}
+            {index === 0 && (
+              <div class="absolute size-full inset-0 bg-linear-to-br from-tertiary to-secondary" />
+            )}
+
+            {/* Bg Image */}
+            {index === 0 && (
+              <div class="absolute size-full inset-0 mix-blend-multiply overflow-hidden">
+                <ImageMod
+                  src="/images/shapes/pricing-shape.png"
+                  alt="shape"
+                  class="size-full object-cover object-top"
+                  width={1920}
+                  height={2080}
+                  loading="lazy"
+                />
+              </div>
+            )}
+
+            {/* Grid Shape */}
+            <div class="absolute size-full inset-0 overflow-hidden">
+              <ImageMod
+                src="/images/shapes/dark-grid-box.png"
+                alt="shape"
+                class="size-full object-cover"
+                width={1920}
+                height={1080}
+                loading="lazy"
+              />
+            </div>
+
+            {/* Top content */}
+            <div
+              class={`${index === 0 ? "border border-light/30 backdrop-blur-md h-min overflow-clip rounded-[18px] flex flex-col gap-6 w-full px-6 pt-7 pb-8.5 relative shadow-[inset_-4px_-4px_50px_#ffffff3d]" : "border border-light backdrop-blur-md h-min overflow-clip flex flex-col gap-6 bg-[#eaeaea33] rounded-[18px] w-full px-6 pt-7 pb-8.5 relative shadow-[inset_-4px_-4px_50px_#4141411a]"}`}
+            >
+              <div class="flex justify-between items-center">
+                <p
+                  class={
+                    "text-xl font-light" +
+                    (index === 0 ? " text-light " : " text-text-dark")
+                  }
+                >
+                  <FaUsers className="inline-block mr-2 text-2xl" />
+                  {plan.plan}
+                </p>
+                <p
+                  class={`border border-light/3 min-w-32 h-min overflow-clip z-3 bg-linear-to-b from-light/0 to-light/12 rounded-full p-3 relative shadow-[inset_4px_4px_9px_#3d3d3d1a,inset_-4px_-4px_4px_#e4e4e440,0_8px_24px_#1d1d1d0a] font-light text-center ${index === 0 ? "text-light" : "gradient-text-primary"}`}
+                >
+                  {plan.discount}
+                </p>
+              </div>
+              <h3
+                class={
+                  "text-h1 " + (index === 0 ? "text-light" : "text-text-dark")
+                }
+              >
+                <span class={index === 1 ? "gradient-text-primary" : ""}>
+                  {typeof plan.price === "number"
+                    ? `${plan.price_prefix}${plan.price.toLocaleString()}`
+                    : plan.price}
+                </span>
+                {typeof plan.price === "number" && (
+                  <span class="text-xl font-secondary tracking-wider capitalize italic font-light inline-block ml-2">
+                    /{plan.type}
+                  </span>
+                )}
+                {typeof plan.price === "string" && plan.type && (
+                  <span class="text-xl font-secondary tracking-wider capitalize italic font-light inline-block ml-2">
+                    {plan.type}
+                  </span>
+                )}
+              </h3>
+            </div>
+            {/* Line */}
+            <div
+              class={
+                "border-t border-dashed overflow-clip flex-none w-full relative [mask:linear-gradient(90deg,#0000_0%,#000_51.4333%,#0000_100%)] my-5" +
+                (index === 0 ? " border-light h-px " : " border-dark h-px ")
+              }
+            />
+            {/* Features */}
+            <div
+              class={
+                index === 0
+                  ? "border border-light/30 backdrop-blur-md h-min overflow-clip rounded-[18px] flex flex-col gap-6 w-full px-6 pt-7 pb-8.5 relative shadow-[inset_-4px_-4px_50px_#ffffff3d]"
+                  : "border border-dark/10 backdrop-blur-md h-min overflow-clip flex flex-col gap-6 bg-[#eaeaea33] rounded-[18px] w-full px-6 pt-7 pb-8.5 relative shadow-[inset_-4px_-4px_50px_#4141411a]"
+              }
+            >
+              <h3
+                class={`font-secondary italic text-h4 tracking-wider font-normal${index === 0 ? " text-light " : " text-text-dark "}`}
+              >
+                {plan.features.title}
+              </h3>
+
+              <ul
+                class={
+                  "flex flex-col gap-y-4 text-xl " +
+                  (index === 0 ? " text-light " : " text-text-dark ")
+                }
+              >
+                {plan.features.items.map((item) => (
+                  <li class="flex items-start gap-x-2">
+                    {index === 0 ? (
+                      <svg
+                        class="text-lg shrink-0 mt-1 sm:mt-0.75"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                      </svg>
+                    ) : (
+                      <ImageMod
+                        src="/images/icons/check-icon.svg"
+                        alt="check icon"
+                        width={24}
+                        height={24}
+                        class="w-6 h-6 shrink-0 mt-1 sm:mt-0.75"
+                      />
+                    )}
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              {/* Buttons */}
+              <div class="flex justify-center items-center gap-5 mt-5 flex-wrap sm:flex-nowrap">
+                {plan.buttons.map((buttonItem, btnIndex) => (
+                  <IconButton
+                    client:visible
+                    href={buttonItem.button.link}
+                    classNames={"w-full !rounded-2xl text-lg"}
+                    variant={btnIndex === 0 ? "filled" : "outline"}
+                  >
+                    {buttonItem.button.label}
+                  </IconButton>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    {
+      book_a_call.enable && (
+        <div class="pb-24">
+          <div class="rounded-[28px] px-10 pt-10 pb-8 relative overflow-hidden">
+            {/* linear */}
+            <div class="absolute size-full inset-0 bg-linear-to-br from-tertiary to-secondary z-0" />
+
+            {/* Bg Image */}
+            <div class="absolute size-full inset-0 mix-blend-multiply overflow-hidden will-change-auto z-0">
+              <ImageMod
+                src="/images/shapes/book-call-shape.png"
+                alt="shape"
+                class="size-full object-cover object-center"
+                width={1920}
+                height={2080}
+                loading="lazy"
+              />
+            </div>
+
+            {/* Grid Shape */}
+            <div class="absolute size-full inset-0 overflow-hidden will-change-auto z-0">
+              <ImageMod
+                src="/images/shapes/dark-grid-box.png"
+                alt="shape"
+                class="size-full object-cover"
+                width={1920}
+                height={1080}
+                loading="lazy"
+              />
+            </div>
+
+            <div class="flex justify-between items-center flex-wrap gap-y-8 will-change-auto">
+              <div class="flex flex-col gap-y-6 relative z-4">
+                <h2
+                  set:html={markdownify(book_a_call.title)}
+                  class="text-light text-h3 has-em"
+                />
+                <ul class="flex items-center gap-4 flex-wrap">
+                  {book_a_call.features.map((item) => (
+                    <li class="text-text-light text-xl">
+                      <FaCheck className="inline-block mr-2 text-lg" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {book_a_call.button.enable && (
+                <IconButton
+                  client:visible
+                  href={book_a_call.button.link}
+                  variant="filled"
+                  classNames="shrink-0"
+                >
+                  <FaPhone className="inline-block mr-2 text-lg" />
+                  {book_a_call.button.label}
+                </IconButton>
+              )}
+            </div>
+          </div>
+        </div>
+      )
+    }
+  </div>
+</section>

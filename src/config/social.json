@@ -1,0 +1,19 @@
+{
+  "main": [
+    {
+      "name": "X",
+      "icon": "FaXTwitter",
+      "link": "https://x.com/mosleydigital"
+    },
+    {
+      "name": "github",
+      "icon": "FaGithub",
+      "link": "https://github.com/mosleydigital"
+    },
+    {
+      "name": "linkedin",
+      "icon": "FaLinkedin",
+      "link": "https://www.linkedin.com/company/mosley-digital"
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+---
+import BlogCard from "@/components/functional-components/BlogCard";
+import IconButton from "@/components/functional-components/IconButton";
+import Share from "@/components/Share.astro";
+import config from "@/config/config.json";
+import Disqus from "@/helpers/Disqus";
+import ScrollAnimation from "@/helpers/ScrollAnimation";
+import Base from "@/layouts/Base.astro";
+import ImageMod from "@/layouts/components/ImageMod.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import dateFormat from "@/lib/utils/dateFormat";
+import similarItems from "@/lib/utils/similarItems";
+import { humanize, markdownify } from "@/lib/utils/textConverter";
+import CallToAction from "@/partials/CallToAction.astro";
+import { render } from "astro:content";
+import { FaArrowLeft } from "react-icons/fa6";
+
+export async function getStaticPaths() {
+  const posts = await getSinglePage("blogSinglePage");
+
+  const paths = posts.map((post) => ({
+    params: {
+      single: post.id,
+    },
+    props: { post },
+  }));
+  return paths;
+}
+
+const { post } = Astro.props;
+const posts = await getSinglePage("blogSinglePage");
+const similarPosts = similarItems(post, posts)?.slice(0, 3);
+const { Content } = await render(post);
+const { title, description, image, date, tags } = post.data;
+
+const { blog_folder } = config.settings;
+---
+
+<Base {...post.data}>
+  <section class="section pt-46">
+    <div class="container">
+      <ScrollAnimation client:visible>
+        <article>
+          <!-- Date Badge -->
+          <div class="flex justify-center items-center mb-8">
+            <span
+              class="py-1 px-3.5 inline-block border border-dark/30 rounded-full font-medium mb-4 text-text-dark"
+            >
+              {date ? dateFormat(date) : ""}
+            </span>
+          </div>
+
+          <!-- Title -->
+          <h1
+            set:html={markdownify(title)}
+            class="lg:text-[100px] leading-none font-secondary italic text-center mb-12"
+          />
+
+          <!-- Featured Image -->
+          {
+            image && (
+              <div class="mb-10">
+                <ImageMod
+                  src={image}
+                  height={500}
+                  width={1200}
+                  alt={title}
+                  class="w-full rounded-2xl object-cover h-140"
+                />
+              </div>
+            )
+          }
+
+          <!-- Content -->
+          <div class="sm:w-10/12 mx-auto">
+            <div class="content py-10 text-center">
+              <Content />
+            </div>
+          </div>
+
+          <!-- Back to Blog Button -->
+          <div class="flex justify-center items-center mb-8">
+            <IconButton client:visible href={`/${blog_folder}`}>
+              <FaArrowLeft />
+              Back to Blog
+            </IconButton>
+          </div>
+
+          <!-- Share & Tags -->
+          <div
+            class="flex items-start justify-between border-b-2 border-border/30 pb-8 mb-10 flex-col md:flex-row gap-6"
+          >
+            <div class="flex items-center">
+              <h5 class="mr-3 text-2xl font-normal">Share on</h5>
+              <Share
+                className="social-icons"
+                title={title}
+                description={description}
+                slug={`${blog_folder}/${post.id}`}
+              />
+            </div>
+            <div class="flex items-center gap-3">
+              <h5 class="mr-3 text-2xl font-normal">Tags</h5>
+              <ul class="flex flex-wrap gap-2">
+                {
+                  tags?.map((tag: string) => (
+                    <li>
+                      <a
+                        href={`/tags/${tag}`}
+                        class="block rounded-full border border-border/50 px-4 py-3 text-text-dark/70 transition-colors duration-300 hover:border-primary hover:text-primary"
+                      >
+                        {humanize(tag)}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+
+          <!-- Disqus Comments -->
+          <Disqus client:visible className="mt-20" />
+        </article>
+      </ScrollAnimation>
+    </div>
+  </section>
+
+  <!-- Related Posts -->
+  <section>
+    <div class="container">
+      <h2 class="h3 mb-12 text-center">Related Posts</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 justify-center gap-6">
+        {
+          similarPosts.map((relatedPost) => (
+            <BlogCard client:visible data={relatedPost} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CallToAction />
+</Base>

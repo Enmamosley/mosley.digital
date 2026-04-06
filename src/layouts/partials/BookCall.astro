@@ -1,0 +1,136 @@
+---
+import IconButton from "@/components/functional-components/IconButton";
+import ImageMod from "@/components/ImageMod.astro";
+import DynamicIcon from "@/helpers/DynamicIcon";
+import ScrollAnimation from "@/helpers/ScrollAnimation";
+import { getListPage } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+
+const sectionData = await getListPage("bookACallSection", "book-a-call");
+if (!sectionData.data.enable) return null;
+const { title, content, button } = sectionData.data;
+---
+
+<section class="section">
+  <div class="container">
+    <div
+      class="py-28 px-7.5 bg-light rounded-4xl relative overflow-hidden transform-none z-3 isolate"
+    >
+      {/* Star Icon */}
+      <ImageMod
+        src="/images/icons/star-icon.png"
+        width={512}
+        height={512}
+        alt="star icon"
+        class="absolute z-2 -top-10 md:-top-20 lg:-top-38 left-0 md:-left-20 lg:-left-38.75 h-30 md:h-60 lg:h-94.75 object-contain animate-[spin_12s_ease_infinite] w-auto"
+      />
+      {/* plan Icon */}
+      <ImageMod
+        src="/images/icons/plan-icon.png"
+        width={512}
+        height={512}
+        alt="plan icon"
+        class="absolute z-2 -bottom-10 md:-bottom-20 lg:-bottom-33 -right-10 md:-right-20 lg:-right-31.25 h-30 md:h-60 lg:h-94.75 object-contain animate-plan w-auto"
+      />
+      {/* Blur */}
+      <div
+        class="absolute top-40 -right-30 md:top-[calc(50%-126px)] md:-right-49 h-60 w-60 md:h-93 md:w-93 bg-secondary rounded-[500px] overflow-clip blur-[70px] z-1 animate-glow"
+      >
+      </div>
+
+      {/* Blur */}
+      <div
+        class="absolute top-40 -left-30 md:top-[calc(50%-126px)] md:-left-49 h-60 w-60 md:h-93 md:w-93 bg-tertiary rounded-[500px] overflow-clip blur-[70px] z-1 animate-glow"
+      >
+      </div>
+
+      {/* SVG Line */}
+      <svg
+        class="absolute top-[54%] left-0 md:left-30 lg:left-63.5 h-146.5 w-53 translate-y-[-50%] opacity-30 sm:opacity-100"
+        role="presentation"
+        viewBox="0 0 210 581"
+      >
+        <path
+          d="M 43.117 0 C 40.201 60.771 20.91 151.594 57.921 180.31 C 93.772 208.127 126.558 179.197 130.596 147.587 C 135.306 74.128 21.718 100.039 3.415 174.3 C -25.225 290.5 133.512 476.375 210 581"
+          fill="transparent"
+          height="581px"
+          id="BxWYWi4BC"
+          stroke="var(--token-115c7d52-2b43-4d24-b1fe-526fdec73451, rgb(237, 226, 255))"
+          stroke-dasharray="0"
+          stroke-linecap="butt"
+          stroke-linejoin="miter"
+          stroke-miterlimit="10"
+          stroke-width="1"
+          transform="translate(0.341 0.021)"
+          width="210.0000000000015px"></path>
+        <path
+          class="animate-stroke-dashoffset"
+          d="M 43.117 0 C 40.201 60.771 20.91 151.594 57.921 180.31 C 93.772 208.127 126.558 179.197 130.596 147.587 C 135.306 74.128 21.718 100.039 3.415 174.3 C -25.225 290.5 133.512 476.375 210 581"
+          fill="transparent"
+          height="581px"
+          id="m_mk4YTv4"
+          stroke="var(--color-primary)"
+          stroke-dasharray="941.2252807617188 941.2252807617188"
+          stroke-linecap="butt"
+          stroke-linejoin="miter"
+          stroke-miterlimit="10"
+          stroke-width="1"
+          transform="translate(0.341 0.021)"
+          width="210.00000000000148px"
+          stroke-dashoffset="941"></path>
+      </svg>
+
+      {/* SVG Line right*/}
+      <svg
+        class="absolute top-[54%] right-0 md:right-30 lg:right-63.5 h-146.5 w-53 translate-y-[-50%] rotate-180 opacity-30 sm:opacity-100"
+        role="presentation"
+        viewBox="0 0 210 581"
+      >
+        <path
+          d="M 43.117 0 C 40.201 60.771 20.91 151.594 57.921 180.31 C 93.772 208.127 126.558 179.197 130.596 147.587 C 135.306 74.128 21.718 100.039 3.415 174.3 C -25.225 290.5 133.512 476.375 210 581"
+          fill="transparent"
+          height="581px"
+          id="BxWYWi4BC"
+          stroke="var(--token-115c7d52-2b43-4d24-b1fe-526fdec73451, rgb(237, 226, 255))"
+          stroke-dasharray="0"
+          stroke-linecap="butt"
+          stroke-linejoin="miter"
+          stroke-miterlimit="10"
+          stroke-width="1"
+          transform="translate(0.341 0.021)"
+          width="210.0000000000015px"></path>
+        <path
+          class="animate-stroke-dashoffset"
+          d="M 43.117 0 C 40.201 60.771 20.91 151.594 57.921 180.31 C 93.772 208.127 126.558 179.197 130.596 147.587 C 135.306 74.128 21.718 100.039 3.415 174.3 C -25.225 290.5 133.512 476.375 210 581"
+          fill="transparent"
+          height="581px"
+          id="m_mk4YTv4"
+          stroke="var(--color-primary)"
+          stroke-dasharray="941.2252807617188 941.2252807617188"
+          stroke-linecap="butt"
+          stroke-linejoin="miter"
+          stroke-miterlimit="10"
+          stroke-width="1"
+          transform="translate(0.341 0.021)"
+          width="210.00000000000148px"
+          stroke-dashoffset="941"></path>
+      </svg>
+      <div
+        class="flex flex-col justify-center items-center text-center gap-6 relative z-10"
+      >
+        <ScrollAnimation client:visible animation="fadeUp">
+          <h2 set:html={markdownify(title)} class="gradient-text" />
+          <p class="font-light" set:html={markdownify(content)} />
+        </ScrollAnimation>
+        {
+          button?.enable && (
+            <IconButton client:visible href={button.link} variant="filled">
+              {button.icon && <DynamicIcon icon={button.icon} />}
+              {button.label}
+            </IconButton>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>

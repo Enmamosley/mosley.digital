@@ -1,0 +1,64 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import config from "@/config/config.json";
+import social from "@/config/social.json";
+import { markdownify } from "@/lib/utils/textConverter";
+import { FaArrowRight } from "react-icons/fa6";
+
+const { copyright } = config.params;
+---
+
+<footer class="pt-10 sticky -bottom-30">
+  <div class="container">
+    <div>
+      <a href="/">
+        <ImageMod
+          src="/images/logo.png"
+          width={1080}
+          height={348}
+          alt="Mosley Digital Services"
+          class="w-64 h-auto mx-auto"
+          loading="lazy"
+        />
+      </a>
+      <div
+        class="bg-dark py-8 px-7 rounded-t-[20px] mt-12 flex sm:justify-between justify-center items-center flex-wrap gap-y-6"
+      >
+        <div>
+          <p
+            class="text-text-light prose-a:underline prose-a:text-text-light prose-a:underline-offset-2 text-lg font-light"
+            set:html={markdownify(copyright)}
+          />
+          <div class="flex flex-wrap gap-4 mt-3 text-sm text-text-light/80">
+            <a href="/privacy" class="hover:text-primary transition duration-300">
+              Politica de privacidad
+            </a>
+            <a href="/terms" class="hover:text-primary transition duration-300">
+              Terminos y condiciones
+            </a>
+          </div>
+        </div>
+
+        <ul
+          class="flex flex-wrap text-text-light capitalize gap-6 text-xl font-light"
+        >
+          {
+            social.main.map((item) => (
+              <li>
+                <a
+                  href={item.link}
+                  class="flex items-center gap-1 hover:text-primary transition group duration-300"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {item.name}{" "}
+                  <FaArrowRight className="text-lg -rotate-45 group-hover:rotate-0 transition duration-300 " />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

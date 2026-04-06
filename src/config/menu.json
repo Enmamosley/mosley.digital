@@ -1,0 +1,28 @@
+{
+  "main": [
+    {
+      "name": "Inicio",
+      "url": "/"
+    },
+    {
+      "name": "Servicios",
+      "url": "/services"
+    },
+    {
+      "name": "Proyectos",
+      "url": "/work"
+    },
+    {
+      "name": "Nosotros",
+      "url": "/about"
+    },
+    {
+      "name": "Blog",
+      "url": "/blog"
+    },
+    {
+      "name": "Contacto",
+      "url": "/contact"
+    }
+  ]
+}

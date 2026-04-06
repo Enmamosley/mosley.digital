@@ -1,0 +1,12 @@
+---
+import GetProjectDoneClient from "@/components/functional-components/GetProjectDoneClient";
+import { getListPage } from "@/lib/contentParser.astro";
+
+const sectionData = await getListPage(
+  "getProjectDoneSection",
+  "get-project-done",
+);
+if (!sectionData.data.enable) return null;
+---
+
+<GetProjectDoneClient client:visible data={sectionData.data} />

@@ -1,0 +1,90 @@
+---
+import IconButton from "@/components/functional-components/IconButton";
+import ImageMod from "@/components/ImageMod.astro";
+import config from "@/config/config.json";
+import DynamicIcon from "@/helpers/DynamicIcon";
+import ScrollAnimation from "@/helpers/ScrollAnimation";
+import { getListPage } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import { FaPaperPlane, FaPhone } from "react-icons/fa6";
+
+const sectionData = await getListPage("ctaSection", "call-to-action");
+if (!sectionData.data.enable) return null;
+
+const { phone, mail } = config.params;
+const { title, book_call } = sectionData.data;
+---
+
+<section class="section pb-0 relative z-1">
+  <div class="container">
+    <ScrollAnimation client:visible>
+      <div
+        class="py-8 pr-10 pl-10 sm:pl-20 rounded-4xl relative overflow-hidden"
+      >
+        <ImageMod
+          src="/images/shapes/call-to-action.jpeg"
+          alt="shape"
+          width={2248}
+          height={1152}
+          class="absolute inset-0 size-full"
+        />
+
+        <div
+          class="flex justify-between items-center relative z-1 flex-wrap gap-y-10"
+        >
+          <div>
+            <h2
+              set:html={markdownify(title)}
+              class="text-light has-em text-h2 lg:text-[64px] mb-6"
+            />
+
+            <div
+              class="flex items-center lg:text-h3 text-light font-secondary font-light gap-6 flex-wrap text-xl"
+            >
+              <a
+                href={`mailto:${mail}`}
+                class="hover:text-lime-500 transition flex items-center gap-x-3 duration-300"
+              >
+                <FaPaperPlane className="lg:text-3xl" />
+                {mail}
+              </a>
+              <a
+                href={`tel:${phone}`}
+                class="hover:text-lime-500 duration-300 transition flex items-center gap-x-3"
+              >
+                <FaPhone className="lg:text-3xl" />
+                {phone}
+              </a>
+            </div>
+          </div>
+
+          <div class="bg-light rounded-[20px] w-83 p-6 shrink-0">
+            <ImageMod
+              src={book_call?.avatar}
+              alt="avatar"
+              width={332}
+              height={400}
+              class="size-20 object-cover object-top rounded-full"
+            />
+            <h3
+              class="mt-8 mb-6 primary-title"
+              set:html={markdownify(book_call?.title)}
+            />
+            <p class="text-xl text-text-dark mb-6">
+              {book_call?.content}
+            </p>
+
+            {
+              book_call?.button && book_call.button.enable && (
+                <IconButton client:visible href={book_call.button.link}>
+                  <DynamicIcon client:visible icon={book_call.button.icon!} />
+                  {book_call.button.label}
+                </IconButton>
+              )
+            }
+          </div>
+        </div>
+      </div>
+    </ScrollAnimation>
+  </div>
+</section>
