@@ -14,5 +14,9 @@ project_info:
   year: 2025
   link: "https://ticmans.com"
   domain: "ticmans.com"
-project_gallery_images: []
+project_gallery_images:
+  - "/images/work/ticmans/1.png"
+  - "/images/work/ticmans/2.png"
+  - "/images/work/ticmans/3.png"
+  - "/images/work/ticmans/4.png"
 ---

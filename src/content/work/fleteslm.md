@@ -14,5 +14,9 @@ project_info:
   year: 2026
   link: "https://fleteslm.com"
   domain: "fleteslm.com"
-project_gallery_images: []
+project_gallery_images:
+  - "/images/work/fleteslm/1.png"
+  - "/images/work/fleteslm/2.png"
+  - "/images/work/fleteslm/3.png"
+  - "/images/work/fleteslm/4.png"
 ---

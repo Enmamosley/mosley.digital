@@ -14,5 +14,9 @@ project_info:
   year: 2025
   link: "https://irnhosting.com"
   domain: "irnhosting.com"
-project_gallery_images: []
+project_gallery_images:
+  - "/images/work/irnhosting/1.png"
+  - "/images/work/irnhosting/2.png"
+  - "/images/work/irnhosting/3.png"
+  - "/images/work/irnhosting/4.png"
 ---
