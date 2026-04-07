@@ -13,6 +13,7 @@ project_info:
   recognition: Presencia internacional
   year: 2025
   link: "https://tankglobalsolution.com"
+  domain: "tankglobalsolution.com"
 project_gallery_images:
   - "/images/work/tank-global-solution/1.png"
   - "/images/work/tank-global-solution/2.png"

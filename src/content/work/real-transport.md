@@ -13,6 +13,7 @@ project_info:
   recognition: Monterrey, NL
   year: 2025
   link: "https://realtransport.com.mx"
+  domain: "realtransport.com.mx"
 project_gallery_images:
   - "/images/work/real-transport/1.png"
   - "/images/work/real-transport/2.png"

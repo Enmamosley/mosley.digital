@@ -13,6 +13,7 @@ project_info:
   recognition: Monterrey, NL
   year: 2024
   link: "https://martielkcm.com"
+  domain: "martielkcm.com"
 project_gallery_images:
   - "/images/work/martiel-kcm/1.png"
   - "/images/work/martiel-kcm/2.png"

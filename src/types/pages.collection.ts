@@ -183,6 +183,7 @@ export const workSinglePage = defineCollection({
       recognition: z.string(),
       year: z.number(),
       link: z.string().optional(),
+      domain: z.string().optional(),
     }),
     project_gallery_images: z.array(z.string()),
   }),

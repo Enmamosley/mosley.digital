@@ -20,6 +20,9 @@ const { work } = Astro.props;
   </div>
   <div class="flex flex-col gap-4 relative z-2 pl-5">
     <h3 class="font-normal">{work.data.title}</h3>
+    {work.data.project_info?.domain && (
+      <span class="text-sm text-text-dark/60 font-secondary -mt-2">{work.data.project_info.domain}</span>
+    )}
     <ul class="flex gap-2">
       {
         work.data.project_info?.role.map((roleItem) => (
