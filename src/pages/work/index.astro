@@ -11,7 +11,11 @@ if (pageIndex.data.draft) {
   return Astro.redirect("/404");
 }
 
-const workList = await getSinglePage("workSinglePage");
+const workList = (await getSinglePage("workSinglePage")).sort((a, b) => {
+  const wa = a.data.weight ?? 99;
+  const wb = b.data.weight ?? 99;
+  return wa - wb;
+});
 
 const { title, page_header } = pageIndex.data;
 ---

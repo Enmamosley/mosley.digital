@@ -17,7 +17,11 @@ const homepage = await getListPage("homePage", "-index");
 const { banner, features, the_standard, recent_work, ready_to_choose_us } =
   homepage.data;
 
-const workList = await getSinglePage("workSinglePage");
+const workList = (await getSinglePage("workSinglePage")).sort((a, b) => {
+  const wa = a.data.weight ?? 99;
+  const wb = b.data.weight ?? 99;
+  return wa - wb;
+});
 ---
 
 <Base>

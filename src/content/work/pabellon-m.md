@@ -5,6 +5,8 @@ meta_title: "Pabellón M — Sitio Web con Animaciones Avanzadas | Mosley Digita
 description: "Réplica pixel-perfect de pabellonm.com con Astro 6, Tailwind CSS 4 y animaciones GSAP ScrollTrigger. Directorio de negocios y mapa interactivo por pisos."
 image: "/images/work/pabellon-m/1.png"
 draft: false
+weight: 3
+featured: true
 color_shape: "#f43f5e"
 project_info:
   client: Pabellón M

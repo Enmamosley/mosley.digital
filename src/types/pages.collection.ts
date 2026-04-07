@@ -175,6 +175,8 @@ export const workSinglePage = defineCollection({
     ...commonFields,
     subtitle: z.string(),
     color_shape: z.string(),
+    weight: z.number().optional(),
+    featured: z.boolean().optional(),
     project_info: z.object({
       client: z.string(),
       role: z.array(z.string()),

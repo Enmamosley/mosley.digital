@@ -5,6 +5,7 @@ meta_title: "Registro de Campo — Aplicación Web | Mosley Digital Services"
 description: "Aplicación web con Laravel 11 para digitalizar el registro de datos en campo. Panel de administración, formularios dinámicos y acceso en tiempo real desde cualquier dispositivo."
 image: "/images/work/registro-campo/1.png"
 draft: false
+weight: 7
 color_shape: "#10b981"
 project_info:
   client: Organización de campo

@@ -5,6 +5,7 @@ meta_title: "Real Transport | Sitio Corporativo — Mosley Digital Services"
 description: "Desarrollo de sitio web corporativo para empresa de transporte en Monterrey con servicios especializados y seguimiento GPS."
 image: "/images/work/real-transport/1.png"
 draft: false
+weight: 6
 color_shape: "#4f46e5"
 project_info:
   client: Real Transport

@@ -5,6 +5,7 @@ meta_title: "Martiel KCM | Sitio Web Corporativo — Mosley Digital Services"
 description: "Desarrollo web para empresa de cocinas premium y muebles de MDF. Diseño moderno con galería de proyectos y formulario de contacto."
 image: "/images/work/martiel-kcm/1.png"
 draft: false
+weight: 5
 color_shape: "#f59e0b"
 project_info:
   client: Martiel KCM

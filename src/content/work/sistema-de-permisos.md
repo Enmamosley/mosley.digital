@@ -5,6 +5,8 @@ meta_title: "Sistema de Permisos de Trabajo — Pabellón M | Mosley Digital Ser
 description: "Sistema web integral para gestión de permisos de trabajo con aprobación multi-nivel, clasificación de riesgo y códigos QR. Desarrollado con Laravel 11 para Pabellón M."
 image: "/images/work/sistema-de-permisos/1.png"
 draft: false
+weight: 2
+featured: true
 color_shape: "#7c3aed"
 project_info:
   client: Pabellón M

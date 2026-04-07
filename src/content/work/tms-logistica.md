@@ -5,6 +5,8 @@ meta_title: "TMS Logística | Sistema de Gestión de Transporte — Mosley Digit
 description: "Sistema web de gestión de transporte con CFDI 4.0 y Carta Porte 3.1, construido con Laravel 11, Livewire 3 y PostgreSQL."
 image: "/images/work/tms-logistica/1.png"
 draft: false
+weight: 1
+featured: true
 color_shape: "#0ea5e9"
 project_info:
   client: Empresa de Transporte de Carga

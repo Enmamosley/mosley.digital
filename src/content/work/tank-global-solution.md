@@ -5,6 +5,7 @@ meta_title: "Tank Global Solution | Sitio Corporativo — Mosley Digital Service
 description: "Sitio web corporativo para empresa internacional de tanques ISO. Diseño y desarrollo con Astro y Tailwind CSS."
 image: "/images/work/tank-global-solution/1.png"
 draft: false
+weight: 4
 color_shape: "#10b981"
 project_info:
   client: Tank Global Solution
