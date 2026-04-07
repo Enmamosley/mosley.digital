@@ -44,10 +44,10 @@ testimonials:
     company_icon: "/images/company/icon-1.svg"
 
 client_logos:
-  - "/images/company/logo-1.svg"
-  - "/images/company/logo-2.svg"
-  - "/images/company/logo-3.svg"
-  - "/images/company/logo-4.svg"
-  - "/images/company/logo-5.svg"
-  - "/images/company/logo-6.svg"
+  - "/images/company/pabellnm.png"
+  - "/images/company/fleteslm.png"
+  - "/images/company/surtipop.png"
+  - "/images/company/tankglobal.png"
+  - "/images/company/tedx.png"
+  - "/images/company/ticmans.png"
 ---
