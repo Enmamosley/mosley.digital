@@ -110,6 +110,7 @@ export const aboutPage = defineCollection({
           name: z.string(),
           position: z.string(),
           image: z.string(),
+          image_position: z.string().optional(),
           social_links: z.array(
             z.object({
               name: z.string(),

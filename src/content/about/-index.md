@@ -54,6 +54,7 @@ team_members:
     - name: "Enmanoell Mosley"
       position: "Fundador & Director Digital"
       image: "/images/about/team/1.png"
+      image_position: "object-[78%_8%]"
       social_links:
         - icon: FaLinkedinIn
           url: "https://www.linkedin.com/in/enmamosley"
@@ -67,6 +68,7 @@ team_members:
     - name: "Valeria"
       position: "Atención al Cliente"
       image: "/images/about/team/2.png"
+      image_position: "object-[50%_10%]"
       social_links:
         - icon: FaLinkedinIn
           url: "https://www.linkedin.com/company/mosley-digital"
