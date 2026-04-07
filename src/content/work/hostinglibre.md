@@ -4,7 +4,7 @@ subtitle: Sitio web para plataforma de servicios de hosting y dominios. Diseño 
 meta_title: "Hosting Libre | Sitio Web — Mosley Digital Services"
 description: "Desarrollo web para plataforma de hosting y dominios. Diseño moderno y orientado a conversión."
 image: ""
-draft: false
+draft: true
 weight: 11
 color_shape: "#22c55e"
 project_info:
