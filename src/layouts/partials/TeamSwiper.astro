@@ -92,7 +92,7 @@ const swiperOptions: SwiperOptions = {
       <Swiper options={swiperOptions} class="team-slider">
         <SwiperWrapper>
           {
-            [...team_members.list, ...team_members.list].map((member) => (
+            [...team_members.list, ...team_members.list, ...team_members.list].map((member) => (
               <SwiperSlide>
                 <TeamCard member={member} />
               </SwiperSlide>
