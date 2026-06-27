@@ -5,6 +5,7 @@ import {
   contactPage,
   homePage,
   regularpage,
+  serviceSinglePage,
   servicesListPage,
   workListPage,
   workSinglePage,
@@ -31,6 +32,7 @@ export const collections = {
   workListPage,
   workSinglePage,
   regularpage,
+  serviceSinglePage,
 
   // sections
   bookACallSection,

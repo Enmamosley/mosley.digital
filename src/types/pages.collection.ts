@@ -38,6 +38,7 @@ export const homePage = defineCollection({
       z.object({
         title: z.string(),
         icon: z.string().optional(),
+        link: z.string().optional(),
       }),
     ),
     the_standard: z.object({
@@ -188,6 +189,37 @@ export const workSinglePage = defineCollection({
       domain: z.string().optional(),
     }),
     project_gallery_images: z.array(z.string()),
+  }),
+});
+
+export const serviceSinglePage = defineCollection({
+  loader: glob({
+    pattern: "**/!(-index|_index).{md,mdx}",
+    base: "src/content/services",
+  }),
+  schema: z.object({
+    title: z.string(),
+    meta_title: z.string().optional(),
+    description: z.string(),
+    draft: z.boolean().default(false),
+    subtitle: z.string(),
+    intro: z.string(),
+    features: z.array(z.object({
+      title: z.string(),
+      description: z.string(),
+    })),
+    pricing: z.array(z.object({
+      name: z.string(),
+      price: z.string(),
+      description: z.string(),
+      highlights: z.array(z.string()),
+      featured: z.boolean().optional().default(false),
+    })).optional(),
+    faq: z.array(z.object({
+      question: z.string(),
+      answer: z.string(),
+    })).optional(),
+    technologies: z.array(z.string()).optional(),
   }),
 });
 

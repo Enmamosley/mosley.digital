@@ -1,0 +1,197 @@
+---
+import ScrollAnimation from "@/helpers/ScrollAnimation";
+import Base from "@/layouts/Base.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import CallToAction from "@/partials/CallToAction.astro";
+
+export async function getStaticPaths() {
+  const services = await getSinglePage("serviceSinglePage");
+  return services.map((service) => ({
+    params: { single: service.id },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const { title, meta_title, description, subtitle, intro, features, pricing, faq, technologies } =
+  service.data;
+
+const allServices = await getSinglePage("serviceSinglePage");
+const otherServices = allServices.filter((s) => s.id !== service.id).slice(0, 3);
+---
+
+<Base {title} meta_title={meta_title || title} {description}>
+  {/* Hero */}
+  <section class="pt-40 pb-16">
+    <div class="container">
+      <ScrollAnimation client:visible>
+        <div class="max-w-2xl">
+          <span class="text-primary text-sm font-medium uppercase tracking-widest">Servicio</span>
+          <h1 class="text-4xl md:text-5xl font-normal text-text-dark mt-3 mb-5 text-balance leading-tight">
+            {title}
+          </h1>
+          <p class="text-lg text-text-dark/60 italic font-secondary mb-6">{subtitle}</p>
+          <p class="text-base text-text-dark/80 leading-relaxed">{intro}</p>
+        </div>
+      </ScrollAnimation>
+    </div>
+  </section>
+
+  {/* Features */}
+  <section class="py-16 bg-theme-light/30">
+    <div class="container">
+      <ScrollAnimation client:visible>
+        <h2 class="text-2xl font-normal text-text-dark mb-10">
+          Qué <em>incluye</em>
+        </h2>
+      </ScrollAnimation>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {features.map((feat, i) => (
+          <ScrollAnimation client:visible delay={0.08 + i * 0.06}>
+            <div class="bg-light rounded-2xl card-shadow p-6 h-full">
+              <h3 class="text-base font-medium text-text-dark mb-2">{feat.title}</h3>
+              <p class="text-sm text-text-dark/70 leading-relaxed">{feat.description}</p>
+            </div>
+          </ScrollAnimation>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Pricing */}
+  {pricing && pricing.length > 0 && (
+    <section class="py-16">
+      <div class="container">
+        <ScrollAnimation client:visible>
+          <h2 class="text-2xl font-normal text-text-dark mb-10">
+            Planes y <em>precios</em>
+          </h2>
+        </ScrollAnimation>
+        <div class={`grid gap-6 ${pricing.length === 1 ? "max-w-sm" : pricing.length === 2 ? "sm:grid-cols-2 max-w-2xl" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
+          {pricing.map((plan, i) => (
+            <ScrollAnimation client:visible delay={0.08 + i * 0.08}>
+              <div class={`rounded-2xl p-6 h-full flex flex-col border ${plan.featured ? "bg-primary text-light border-primary" : "bg-light card-shadow border-dark/10"}`}>
+                <div class="mb-4">
+                  <h3 class={`text-base font-medium mb-1 ${plan.featured ? "text-light" : "text-text-dark"}`}>
+                    {plan.name}
+                  </h3>
+                  <p class={`text-sm mb-3 ${plan.featured ? "text-light/70" : "text-text-dark/60"}`}>
+                    {plan.description}
+                  </p>
+                  <p class={`text-2xl font-semibold ${plan.featured ? "text-light" : "text-text-dark"}`}>
+                    {plan.price}
+                  </p>
+                </div>
+                <ul class="flex flex-col gap-2 mt-4 flex-1">
+                  {plan.highlights.map((item) => (
+                    <li class={`flex items-start gap-2 text-sm ${plan.featured ? "text-light/90" : "text-text-dark/80"}`}>
+                      <span class={`mt-0.5 shrink-0 ${plan.featured ? "text-light" : "text-primary"}`}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="/contact"
+                  class={`mt-6 inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-300 ${plan.featured ? "bg-light text-primary hover:bg-light/90" : "bg-primary text-light hover:bg-primary/90"}`}
+                >
+                  Cotizar
+                </a>
+              </div>
+            </ScrollAnimation>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {/* Technologies */}
+  {technologies && technologies.length > 0 && (
+    <section class="py-10 border-t border-dark/10">
+      <div class="container">
+        <ScrollAnimation client:visible>
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="text-sm text-text-dark/50 mr-2">Tecnologías:</span>
+            {technologies.map((tech) => (
+              <span class="text-sm text-text-dark/80 bg-light card-shadow rounded-full px-4 py-1.5 border border-dark/10">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </ScrollAnimation>
+      </div>
+    </section>
+  )}
+
+  {/* FAQ */}
+  {faq && faq.length > 0 && (
+    <section class="py-16 bg-theme-light/30">
+      <div class="container">
+        <ScrollAnimation client:visible>
+          <h2 class="text-2xl font-normal text-text-dark mb-10">
+            Preguntas <em>frecuentes</em>
+          </h2>
+        </ScrollAnimation>
+        <div class="max-w-3xl flex flex-col gap-4">
+          {faq.map((item, i) => (
+            <ScrollAnimation client:visible delay={0.06 + i * 0.05}>
+              <details class="group bg-light rounded-2xl card-shadow border border-dark/10 overflow-hidden">
+                <summary class="flex items-center justify-between gap-4 cursor-pointer p-6 text-sm font-medium text-text-dark select-none list-none">
+                  {item.question}
+                  <span class="shrink-0 text-primary transition-transform duration-300 group-open:rotate-45">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="12" y1="5" x2="12" y2="19"></line>
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                  </span>
+                </summary>
+                <div class="px-6 pb-6 text-sm text-text-dark/70 leading-relaxed border-t border-dark/10 pt-4">
+                  {item.answer}
+                </div>
+              </details>
+            </ScrollAnimation>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {/* Other services */}
+  {otherServices.length > 0 && (
+    <section class="py-16">
+      <div class="container">
+        <div class="border-t border-dark/10 pt-12">
+          <ScrollAnimation client:visible>
+            <h3 class="text-xl font-normal text-text-dark/60 mb-8">Otros servicios</h3>
+          </ScrollAnimation>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {otherServices.map((s, i) => (
+              <ScrollAnimation client:visible delay={0.08 + i * 0.08}>
+                <a
+                  href={`/services/${s.id}`}
+                  class="group bg-light card-shadow relative flex min-h-24 w-full items-center overflow-hidden rounded-2xl py-5 pr-10 pl-6 transition-all duration-500 hover:-translate-y-1 border border-dark/10"
+                >
+                  <span class="bg-primary/60 group-hover:bg-primary absolute top-5 bottom-5 left-3 w-1 rounded-full transition-all duration-500 group-hover:top-4 group-hover:bottom-4"></span>
+                  <div>
+                    <p class="text-base font-medium text-text-dark leading-snug">{s.data.title}</p>
+                    <p class="text-xs text-text-dark/50 mt-1">{s.data.subtitle}</p>
+                  </div>
+                  <span class="bg-primary text-light absolute right-3 bottom-3 flex size-7 translate-x-2 items-center justify-center rounded-full opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M5 12h14M13 6l6 6-6 6"></path>
+                    </svg>
+                  </span>
+                </a>
+              </ScrollAnimation>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <CallToAction />
+</Base>

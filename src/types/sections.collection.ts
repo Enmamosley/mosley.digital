@@ -55,7 +55,8 @@ export const featuresSection = defineCollection({
     features: z.array(
       z.object({
         title: z.string(),
-        icon: z.string(),
+        icon: z.string().optional(),
+        link: z.string().optional(),
       }),
     ),
   }),
