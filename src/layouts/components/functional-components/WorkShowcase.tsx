@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 type ViewMode = "desktop" | "tablet" | "mobile";
 
@@ -7,40 +7,83 @@ interface Props {
   projectName: string;
 }
 
+const IFRAME_W = 1800;
+const IFRAME_H = 1200;
+
 const WorkShowcase: React.FC<Props> = ({ url, projectName }) => {
   const [loaded, setLoaded] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>("desktop");
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(800);
 
   useEffect(() => {
-    const set = () => {
-      if (window.innerWidth < 768) setViewMode("mobile");
-    };
-    set();
-    window.addEventListener("resize", set);
-    return () => window.removeEventListener("resize", set);
+    if (window.innerWidth < 768) setViewMode("mobile");
+    const onResize = () => { if (window.innerWidth < 768) setViewMode("mobile"); };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  // container height matches the scaled iframe
-  const containerH =
-    viewMode === "desktop" ? "h-[528px]" : "h-[580px]";
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    setContainerWidth(el.offsetWidth);
+    const ro = new ResizeObserver(([entry]) => setContainerWidth(entry.contentRect.width));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  // Desktop: scale to fill the exact container width, no gray strip
+  const desktopScale = containerWidth / IFRAME_W;
+  const desktopHeight = Math.round(IFRAME_H * desktopScale);
+
+  const containerHeight = viewMode === "desktop" ? desktopHeight : 580;
+
+  const iframeStyle: React.CSSProperties =
+    viewMode === "desktop"
+      ? {
+          width: IFRAME_W,
+          height: IFRAME_H,
+          transformOrigin: "top left",
+          transform: `scale(${desktopScale})`,
+          border: "none",
+          flexShrink: 0,
+        }
+      : viewMode === "tablet"
+      ? {
+          width: 820,
+          height: 1180,
+          transformOrigin: "center center",
+          transform: "scale(0.45)",
+          borderRadius: 25,
+          boxShadow: "0 20px 60px rgba(0,0,0,0.25), 0 0 0 8px #1a1a1a, 0 0 0 12px #333",
+          border: "none",
+          flexShrink: 0,
+        }
+      : {
+          width: 414,
+          height: 896,
+          transformOrigin: "center center",
+          transform: "scale(0.5)",
+          borderRadius: 35,
+          boxShadow: "0 15px 50px rgba(0,0,0,0.3), 0 0 0 4px #1a1a1a, 0 0 0 6px #333",
+          border: "none",
+          flexShrink: 0,
+        };
 
   return (
     <div className="rounded-3xl overflow-hidden border border-dark/10">
       {/* Browser chrome */}
       <div className="bg-light border-b border-dark/10 px-4 py-3 flex items-center justify-between">
-        {/* Traffic lights */}
         <div className="flex gap-1.5">
           <span className="w-3 h-3 rounded-full bg-red-400" />
           <span className="w-3 h-3 rounded-full bg-yellow-400" />
           <span className="w-3 h-3 rounded-full bg-green-400" />
         </div>
 
-        {/* URL bar */}
         <div className="flex-1 mx-4 bg-white/70 rounded-full px-4 py-1 text-xs text-text-dark/50 font-secondary truncate text-center border border-dark/10">
           {url}
         </div>
 
-        {/* Device switcher */}
         <div className="flex items-center gap-1 bg-white rounded-lg p-0.5 border border-dark/10">
           {(["desktop", "tablet", "mobile"] as ViewMode[]).map((mode) => {
             const icons: Record<ViewMode, React.ReactNode> = {
@@ -80,7 +123,6 @@ const WorkShowcase: React.FC<Props> = ({ url, projectName }) => {
           })}
         </div>
 
-        {/* External link */}
         <a
           href={url}
           target="_blank"
@@ -98,9 +140,11 @@ const WorkShowcase: React.FC<Props> = ({ url, projectName }) => {
 
       {/* iframe container */}
       <div
-        className={`relative w-full overflow-hidden bg-gray-100 ${containerH} ${
+        ref={containerRef}
+        className={`relative w-full overflow-hidden bg-gray-100 ${
           viewMode !== "desktop" ? "flex items-center justify-center py-6" : ""
         }`}
+        style={{ height: `${containerHeight}px` }}
       >
         {!loaded && (
           <div className="absolute inset-0 flex items-center justify-center text-sm text-text-dark/40">
@@ -110,7 +154,7 @@ const WorkShowcase: React.FC<Props> = ({ url, projectName }) => {
         <iframe
           src={url}
           title={`Vista previa de ${projectName}`}
-          className={`browser-preview-frame ${viewMode}`}
+          style={iframeStyle}
           sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
           loading="lazy"
           onLoad={() => setLoaded(true)}

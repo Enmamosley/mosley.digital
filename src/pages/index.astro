@@ -10,7 +10,7 @@ import Hero from "@/partials/Hero.astro";
 import Pricing from "@/partials/Pricing.astro";
 import Testimonial from "@/partials/Testimonial.astro";
 import TheStandard from "@/partials/TheStandard.astro";
-import WorkSwiper from "@/partials/WorkSwiper.astro";
+import WorkGrid from "@/partials/WorkGrid.astro";
 
 const homepage = await getListPage("homePage", "-index");
 
@@ -27,7 +27,7 @@ const workList = (await getSinglePage("workSinglePage")).sort((a, b) => {
 <Base>
   <Hero banner={banner} features={features} />
   <TheStandard data={the_standard} />
-  <WorkSwiper data={recent_work} work={workList} />
+  <WorkGrid data={recent_work} work={workList} />
   <BookCall />
   <GetProjectDone />
   <Testimonial isHome={true} />

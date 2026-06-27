@@ -6,15 +6,15 @@
     },
     {
       "name": "Servicios",
-      "url": "/services"
+      "url": "/servicios"
     },
     {
       "name": "Proyectos",
-      "url": "/work"
+      "url": "/proyectos"
     },
     {
       "name": "Nosotros",
-      "url": "/about"
+      "url": "/nosotros"
     },
     {
       "name": "Blog",
@@ -22,7 +22,7 @@
     },
     {
       "name": "Contacto",
-      "url": "/contact"
+      "url": "/contacto"
     }
   ]
 }

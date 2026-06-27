@@ -11,7 +11,7 @@ project_step:
     content: Una llamada de 15 minutos es suficiente para entender tu negocio y darte un número real con alcance definido.
     button:
       enable: true
-      link: "/contact"
+      link: "/contacto"
       label: Agendar llamada
     bullet_points:
       - Sin costo y sin compromiso
@@ -33,7 +33,7 @@ project_step:
     content: Diseño en Figma primero, código después. Ves los avances en tiempo real y participas en cada decisión importante.
     button:
       enable: true
-      link: "/contact"
+      link: "/contacto"
       label: Ver portafolio
     bullet_points:
       - Prototipo aprobado antes de programar
@@ -55,7 +55,7 @@ project_step:
     content: El lanzamiento es solo el inicio. Monitoreamos el desempeño y tenemos planes de mantenimiento para que tu inversión siga generando resultados.
     button:
       enable: true
-      link: "/contact"
+      link: "/contacto"
       label: Saber más
     bullet_points:
       - Despliegue con cero tiempo de inactividad

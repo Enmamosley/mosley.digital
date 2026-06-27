@@ -1,0 +1,117 @@
+---
+import WorkGallery from "@/components/functional-components/WorkGallery";
+import WorkShowcase from "@/components/functional-components/WorkShowcase";
+import WorkCard from "@/components/WorkCard.astro";
+import ScrollAnimation from "@/helpers/ScrollAnimation";
+import Base from "@/layouts/Base.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import CallToAction from "@/partials/CallToAction.astro";
+
+export async function getStaticPaths() {
+  const workList = await getSinglePage("workSinglePage");
+
+  const paths = workList.map((work) => ({
+    params: { single: work.id },
+    props: { work },
+  }));
+  return paths;
+}
+
+const { work } = Astro.props;
+const { title, subtitle, project_info, project_gallery_images, display_mode } =
+  work.data;
+
+const isShowcase = display_mode === "showcase" && !!project_info?.link;
+
+const allWork = await getSinglePage("workSinglePage");
+const otherWork = allWork.filter((w) => w.id !== work.id).slice(0, 3);
+---
+
+<Base {...work.data}>
+  <section class="pb-10 pt-40">
+    <div class="container">
+      <div class="grid lg:grid-cols-6 gap-8">
+
+        {/* Sidebar */}
+        <div class="lg:col-span-2">
+          <ScrollAnimation client:visible delay={0.2}>
+            <div class="sticky top-5 flex flex-col gap-4">
+
+              {/* Title + description card */}
+              <div class="bg-light rounded-2xl border border-dark/10 card-shadow p-6">
+                <h2 class="text-2xl font-normal text-text-dark mb-3">{title}</h2>
+                <p class="text-sm leading-relaxed text-text-dark/70">{subtitle}</p>
+              </div>
+
+              {/* Project info card */}
+              <div class="bg-light rounded-2xl border border-dark/10 card-shadow">
+                <h4 class="text-sm font-normal text-text-dark/50 text-center py-4 border-b border-dark/10 tracking-wide uppercase">
+                  Información del proyecto
+                </h4>
+                <div class="p-6 flex flex-col gap-3">
+                  <div class="flex items-center justify-between gap-4">
+                    <span class="text-sm text-text-dark/50 shrink-0">Cliente</span>
+                    <span class="text-sm text-text-dark text-right">{project_info?.client}</span>
+                  </div>
+                  <div class="flex items-center justify-between gap-4">
+                    <span class="text-sm text-text-dark/50 shrink-0">Rol</span>
+                    <span class="text-sm text-text-dark text-right">{project_info?.role?.join(", ")}</span>
+                  </div>
+                  <div class="flex items-center justify-between gap-4">
+                    <span class="text-sm text-text-dark/50 shrink-0">Ubicación</span>
+                    <span class="text-sm text-text-dark text-right">{project_info?.recognition}</span>
+                  </div>
+                  <div class="flex items-center justify-between gap-4">
+                    <span class="text-sm text-text-dark/50 shrink-0">Año</span>
+                    <span class="text-sm text-text-dark text-right">{project_info?.year}</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </ScrollAnimation>
+        </div>
+
+        {/* Main content — showcase or gallery */}
+        <div class="lg:col-span-4">
+          <ScrollAnimation client:visible delay={0.1}>
+            {
+              isShowcase ? (
+                <WorkShowcase
+                  client:load
+                  url={project_info!.link!}
+                  projectName={title}
+                />
+              ) : (
+                <WorkGallery
+                  client:load
+                  images={project_gallery_images ?? []}
+                  alt={title}
+                />
+              )
+            }
+          </ScrollAnimation>
+        </div>
+
+      </div>
+
+      {/* Other projects */}
+      {otherWork.length > 0 && (
+        <div class="mt-20 pt-12 border-t border-dark/10">
+          <ScrollAnimation client:visible>
+            <h3 class="text-xl font-normal text-text-dark/60 mb-8">Más proyectos</h3>
+          </ScrollAnimation>
+          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {otherWork.map((item, index) => (
+              <ScrollAnimation client:visible delay={0.08 + index * 0.08}>
+                <WorkCard work={item} compact />
+              </ScrollAnimation>
+            ))}
+          </div>
+        </div>
+      )}
+
+    </div>
+  </section>
+  <CallToAction />
+</Base>

@@ -1,0 +1,43 @@
+---
+import Title from "@/components/Title.astro";
+import WorkCard from "@/components/WorkCard.astro";
+import ScrollAnimation from "@/helpers/ScrollAnimation";
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  work: CollectionEntry<"workSinglePage">[];
+  data: CollectionEntry<"homePage">["data"]["recent_work"];
+};
+
+const { work, data }: Props = Astro.props;
+if (!data.enable) return null;
+
+// Show the first 8 projects in a 4x2 grid
+const items = work.slice(0, 8);
+---
+
+<section class={`section`}>
+  <div class="container">
+    <div class="mb-12">
+      <ScrollAnimation client:visible>
+        <Title title={data.title} />
+      </ScrollAnimation>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {
+        items.map((item, index) => (
+          <ScrollAnimation client:visible delay={0.1 + index * 0.08}>
+            <WorkCard work={item} compact />
+          </ScrollAnimation>
+        ))
+      }
+    </div>
+
+    <div class="mt-12 flex justify-center">
+      <a href="/proyectos" class="btn btn-outline-primary button-grab-effect">
+        Ver más proyectos
+      </a>
+    </div>
+  </div>
+</section>

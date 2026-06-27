@@ -29,11 +29,11 @@ const { title, page_header } = pageIndex.data;
 
   <section class="pb-20">
     <div class="container">
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {
           workList.map((work, index) => (
-            <ScrollAnimation client:visible delay={0.2 + index * 0.1}>
-              <WorkCard work={work} />
+            <ScrollAnimation client:visible delay={0.1 + index * 0.08}>
+              <WorkCard work={work} compact />
             </ScrollAnimation>
           ))
         }

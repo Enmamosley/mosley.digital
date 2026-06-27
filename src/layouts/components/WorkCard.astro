@@ -4,45 +4,57 @@ import ImageMod from "./ImageMod.astro";
 
 type Props = {
   work: CollectionEntry<"workSinglePage">;
+  compact?: boolean;
 };
 
-const { work } = Astro.props;
+const { work, compact = false } = Astro.props;
+
+// Fixed image container height — compact for dense grids (homepage 4-col),
+// taller for the wider cards on the /work page.
+const imageHeight = compact ? "h-56" : "h-120";
+const imageClass = `w-full ${imageHeight} rounded-2xl object-cover will-change-transform hover:scale-[1.3] hover:rotate-[-10deg] transition-transform duration-700`;
 ---
 
 <a
-  href={`work/${work.id}`}
-  class="p-4 pt-7 bg-light rounded-3xl flex flex-col gap-6 relative overflow-hidden will-change-transform"
+  href={`/proyectos/${work.id}`}
+  class:list={[
+    "bg-light rounded-3xl flex flex-col relative overflow-hidden will-change-transform h-full",
+    compact ? "p-3 pt-6 gap-4" : "p-4 pt-7 gap-6",
+  ]}
 >
   <div
-    class={` rounded-full blur-[100px] opacity-70 size-73 -top-16.75 -right-19.25 absolute overflow-clip z-1`}
-    style={{ backgroundColor: work.data.color_shape }}
+    class:list={[
+      "flex flex-col relative z-2",
+      compact ? "gap-2.5 pl-3" : "gap-4 pl-5",
+    ]}
   >
-  </div>
-  <div class="flex flex-col gap-4 relative z-2 pl-5">
-    <h3 class="font-normal">{work.data.title}</h3>
+    <h3 class:list={["font-normal", compact && "text-xl leading-snug"]}>
+      {work.data.title}
+    </h3>
     {work.data.project_info?.domain && (
-      <span class="text-sm text-text-dark/60 font-secondary -mt-2">{work.data.project_info.domain}</span>
+      <span class="text-sm text-text-dark/60 font-secondary -mt-1">{work.data.project_info.domain}</span>
     )}
-    <ul class="flex gap-2">
-      {
-        work.data.project_info?.role.map((roleItem) => (
-          <li class="bg-linear-to-b from-light to-light badge-shadow inline-block rounded-full py-1.5 px-3.5">
-            {roleItem}
-          </li>
-        ))
-      }
-    </ul>
+    {work.data.description && (
+      <p
+        class:list={[
+          "text-text-dark/70",
+          compact ? "text-sm leading-relaxed line-clamp-3" : "leading-relaxed",
+        ]}
+      >
+        {work.data.description}
+      </p>
+    )}
   </div>
 
   {
     work.data.image && (
-      <div class="relative z-2 overflow-hidden rounded-2xl">
+      <div class="relative z-2 mt-auto overflow-hidden rounded-2xl">
         <ImageMod
           src={work.data.image}
           alt={work.data.title}
           width={1000}
           height={700}
-          class="w-full h-120 rounded-2xl object-cover will-change-transform hover:scale-[1.3] hover:rotate-[-10deg] transition-transform duration-700"
+          class={imageClass}
           loading="lazy"
         />
       </div>

@@ -1,8 +1,8 @@
 ---
 import Badge from "@/components/Badge.astro";
+import FeatureCard from "@/components/FeatureCard.astro";
 import IconButton from "@/components/functional-components/IconButton";
 import GridImage from "@/components/GridImage.astro";
-import HeroFeaturedCards from "@/components/functional-components/HeroFeaturedCards";
 import DynamicIcon from "@/helpers/DynamicIcon";
 import ScrollAnimation from "@/helpers/ScrollAnimation";
 import { markdownify } from "@/lib/utils/textConverter";
@@ -57,6 +57,14 @@ const { banner, features } = Astro.props;
       </div>
     </ScrollAnimation>
 
-    <HeroFeaturedCards client:visible features={features} />
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 pb-16 md:pb-24">
+      {
+        features.map((feature, index) => (
+          <ScrollAnimation client:visible delay={0.2 + index * 0.08}>
+            <FeatureCard feature={feature} />
+          </ScrollAnimation>
+        ))
+      }
+    </div>
   </div>
 </section>

@@ -10,7 +10,7 @@ content: |
   para darte un número real y un plan claro
 button:
   label: Agendar llamada
-  link: "/contact"
+  link: "/contacto"
   icon: FaPhone
   enable: true
 ---
