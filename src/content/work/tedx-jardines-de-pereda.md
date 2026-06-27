@@ -6,6 +6,7 @@ description: "Desarrollo web para evento TEDx en Santander, España. Landing pag
 image: "/images/work/tedx/01.png"
 draft: false
 weight: 12
+display_mode: showcase
 color_shape: "#e11d48"
 project_info:
   client: TEDx Jardines de Pereda

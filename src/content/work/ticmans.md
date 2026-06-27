@@ -6,6 +6,7 @@ description: "Desarrollo web para empresa de soluciones tecnológicas. Implement
 image: "/images/work/ticmans/1.png"
 draft: false
 weight: 9
+display_mode: showcase
 color_shape: "#6366f1"
 project_info:
   client: Ticmans

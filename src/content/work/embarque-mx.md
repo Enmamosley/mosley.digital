@@ -7,6 +7,7 @@ image: "/images/work/embarque-mx/1.png"
 draft: false
 weight: 1
 featured: true
+display_mode: gallery
 color_shape: "#0ea5e9"
 project_info:
   client: Empresa de Transporte de Carga

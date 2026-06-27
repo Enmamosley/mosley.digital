@@ -6,6 +6,7 @@ description: "Desarrollo web para plataforma de hosting y dominios. Diseño mode
 image: ""
 draft: true
 weight: 11
+display_mode: showcase
 color_shape: "#22c55e"
 project_info:
   client: Hosting Libre

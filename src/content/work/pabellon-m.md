@@ -7,6 +7,7 @@ image: "/images/work/pabellon-m/1.png"
 draft: false
 weight: 3
 featured: true
+display_mode: showcase
 color_shape: "#f43f5e"
 project_info:
   client: Pabellón M

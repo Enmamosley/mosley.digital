@@ -1,5 +1,6 @@
 ---
 import Gallery from "@/components/functional-components/Gallery";
+import WorkShowcase from "@/components/functional-components/WorkShowcase";
 import ImageMod from "@/components/ImageMod.astro";
 import ScrollAnimation from "@/helpers/ScrollAnimation";
 import Base from "@/layouts/Base.astro";
@@ -19,13 +20,18 @@ export async function getStaticPaths() {
 }
 
 const { work } = Astro.props;
-const { title, subtitle, project_info, project_gallery_images } = work.data;
+const { title, subtitle, project_info, project_gallery_images, display_mode } =
+  work.data;
+
+const isShowcase =
+  display_mode === "showcase" && !!project_info?.link;
 ---
 
 <Base {...work.data}>
   <section class="pb-10 pt-40">
     <div class="container">
       <div class="grid lg:grid-cols-6 gap-8">
+        {/* Sidebar */}
         <div class="lg:col-span-2">
           <ScrollAnimation client:visible delay={0.2}>
             <div
@@ -69,7 +75,9 @@ const { title, subtitle, project_info, project_gallery_images } = work.data;
                     {project_info?.recognition}
                   </span>
                 </li>
-                <li class={`flex items-center gap-2${project_info?.link ? ' pb-2 border-b-2 border-dark/40' : ''}`}>
+                <li
+                  class={`flex items-center gap-2${project_info?.link ? " pb-2 border-b-2 border-dark/40" : ""}`}
+                >
                   <b>Año:</b>
                   <span
                     class="font-secondary italic font-light text-text-dark/90"
@@ -77,47 +85,58 @@ const { title, subtitle, project_info, project_gallery_images } = work.data;
                     {project_info?.year}
                   </span>
                 </li>
-                {project_info?.link && (
-                  <li class="flex items-center gap-2">
-                    <b>Sitio:</b>
-                    <a
-                      href={project_info.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="font-secondary italic font-light text-blue-600 hover:underline"
-                    >
-                      {project_info.domain || "Ver en vivo"}
-                    </a>
-                  </li>
-                )}
+                {
+                  project_info?.link && (
+                    <li class="flex items-center gap-2">
+                      <b>Sitio:</b>
+                      <a
+                        href={project_info.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="font-secondary italic font-light text-blue-600 hover:underline"
+                      >
+                        {project_info.domain || "Ver en vivo"}
+                      </a>
+                    </li>
+                  )
+                }
               </ul>
             </div>
           </ScrollAnimation>
         </div>
 
+        {/* Main content — showcase or gallery */}
         <div class="lg:col-span-4">
           <ScrollAnimation client:visible delay={0.1}>
-            <Gallery client:load>
-              <div class="flex flex-col gap-6">
-                {
-                  project_gallery_images?.map((imageSrc) => (
-                    <a
-                      href={imageSrc}
-                      class="glightbox overflow-hidden rounded-3xl"
-                      data-gallery="work-gallery"
-                    >
-                      <ImageMod
-                        src={imageSrc}
-                        alt={title}
-                        width={800}
-                        height={600}
-                        class="w-full h-auto rounded-3xl cursor-pointer hover:opacity-90 transition-opacity"
-                      />
-                    </a>
-                  ))
-                }
-              </div>
-            </Gallery>
+            {
+              isShowcase ? (
+                <WorkShowcase
+                  client:load
+                  url={project_info!.link!}
+                  projectName={title}
+                />
+              ) : (
+                <Gallery client:load>
+                  <div class="flex flex-col gap-6">
+                    {project_gallery_images?.map((imageSrc) => (
+                      <a
+                        href={imageSrc}
+                        class="glightbox overflow-hidden rounded-3xl"
+                        data-gallery="work-gallery"
+                      >
+                        <ImageMod
+                          src={imageSrc}
+                          alt={title}
+                          width={800}
+                          height={600}
+                          class="w-full h-auto rounded-3xl cursor-pointer hover:opacity-90 transition-opacity"
+                        />
+                      </a>
+                    ))}
+                  </div>
+                </Gallery>
+              )
+            }
           </ScrollAnimation>
         </div>
       </div>

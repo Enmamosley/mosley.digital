@@ -6,6 +6,7 @@ description: "Desarrollo web para empresa de cocinas premium y muebles de MDF. D
 image: "/images/work/martiel-kcm/1.png"
 draft: false
 weight: 5
+display_mode: showcase
 color_shape: "#f59e0b"
 project_info:
   client: Martiel KCM

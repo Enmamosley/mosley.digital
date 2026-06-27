@@ -37,7 +37,7 @@ export const homePage = defineCollection({
     features: z.array(
       z.object({
         title: z.string(),
-        icon: z.string(),
+        icon: z.string().optional(),
       }),
     ),
     the_standard: z.object({
@@ -176,6 +176,7 @@ export const workSinglePage = defineCollection({
     ...commonFields,
     subtitle: z.string(),
     color_shape: z.string(),
+    display_mode: z.enum(["gallery", "showcase"]).optional().default("gallery"),
     weight: z.number().optional(),
     featured: z.boolean().optional(),
     project_info: z.object({

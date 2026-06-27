@@ -6,6 +6,7 @@ description: "Desarrollo web para empresa de transporte terrestre de carga. Serv
 image: "/images/work/fleteslm/1.png"
 draft: false
 weight: 8
+display_mode: showcase
 color_shape: "#0369a1"
 project_info:
   client: Movimientos y Fletes LM

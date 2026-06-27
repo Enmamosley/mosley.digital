@@ -6,6 +6,7 @@ description: "Sitio web corporativo para empresa internacional de tanques ISO. D
 image: "/images/work/tank-global-solution/1.png"
 draft: false
 weight: 4
+display_mode: showcase
 color_shape: "#10b981"
 project_info:
   client: Tank Global Solution

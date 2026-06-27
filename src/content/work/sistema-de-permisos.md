@@ -7,6 +7,7 @@ image: "/images/work/sistema-de-permisos/1.png"
 draft: false
 weight: 2
 featured: true
+display_mode: gallery
 color_shape: "#7c3aed"
 project_info:
   client: Pabellón M

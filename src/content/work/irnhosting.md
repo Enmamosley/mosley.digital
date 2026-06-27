@@ -6,6 +6,7 @@ description: "Desarrollo web para plataforma de hosting cloud. Autoscaling, CDN 
 image: "/images/work/irnhosting/1.png"
 draft: false
 weight: 10
+display_mode: showcase
 color_shape: "#0ea5e9"
 project_info:
   client: IRN Hosting LLC
