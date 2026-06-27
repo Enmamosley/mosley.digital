@@ -65,7 +65,7 @@ team_members:
         - icon: FaXTwitter
           url: "https://x.com/mosleydigital"
           name: "X"
-    - name: "Valeria"
+    - name: "Fátima Arrieta"
       position: "Atención al Cliente"
       image: "/images/about/team/2.png"
       image_position: "object-[50%_10%]"

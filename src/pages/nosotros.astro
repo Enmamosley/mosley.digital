@@ -7,7 +7,6 @@ import { getListPage } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import CallToAction from "@/partials/CallToAction.astro";
 import PageHeader from "@/partials/PageHeader.astro";
-import TeamSwiper from "@/partials/TeamSwiper.astro";
 
 const pageIndex = await getListPage("aboutPage", "-index");
 if (pageIndex.data.draft) {
@@ -16,7 +15,7 @@ if (pageIndex.data.draft) {
 
 const featuresSection = await getListPage("featuresSection", "features");
 
-const { page_header, gallery_list, our_story, team_members } = pageIndex.data;
+const { page_header, our_story, team_members } = pageIndex.data;
 ---
 
 <Base {...pageIndex.data}>
@@ -25,26 +24,6 @@ const { page_header, gallery_list, our_story, team_members } = pageIndex.data;
     subtitle={page_header?.subtitle}
     badge={page_header?.badge}
   />
-
-  <!-- Gallery Marquee -->
-  <div class="relative overflow-hidden py-12">
-    <div class="flex animate-marquee">
-      {
-        gallery_list &&
-          [...gallery_list, ...gallery_list].map((img, index) => (
-            <div class="shrink-0 px-2 sm:px-4">
-              <ImageMod
-                src={img}
-                alt={`Gallery image ${index + 1}`}
-                width={1400}
-                height={1000}
-                class="w-75 sm:w-100 xl:w-200 h-50 sm:h-75 xl:h-150 object-cover rounded-xl sm:rounded-3xl"
-              />
-            </div>
-          ))
-      }
-    </div>
-  </div>
 
   <!-- Our Story Section -->
   {
@@ -124,14 +103,10 @@ const { page_header, gallery_list, our_story, team_members } = pageIndex.data;
                 />
               </ScrollAnimation>
 
-              <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                {featuresSection.data.features.map((feature, indexNum) => (
-                  <ScrollAnimation
-                    client:visible
-                    delay={indexNum * 0.1}
-                    stagger={indexNum}
-                  >
-                    <FeatureCard index={indexNum} feature={feature} />
+              <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
+                {featuresSection.data.features.map((feature, i) => (
+                  <ScrollAnimation client:visible delay={i * 0.07}>
+                    <FeatureCard feature={feature} />
                   </ScrollAnimation>
                 ))}
               </div>
@@ -143,7 +118,54 @@ const { page_header, gallery_list, our_story, team_members } = pageIndex.data;
   }
 
   <!-- Team Section -->
-  {team_members.enable && <TeamSwiper team_members={team_members} />}
+  {team_members.enable && (
+    <section class="py-24 sm:py-32">
+      <div class="container">
+        <ScrollAnimation client:visible>
+          <div class="grid gap-20 xl:grid-cols-3">
+
+            <div class="max-w-xl">
+              <h2
+                class="has-em text-h1 section-title"
+                set:html={team_members.title}
+              />
+              <p class="mt-6 text-lg text-text-dark/60 leading-relaxed">
+                Un equipo apasionado por la tecnología y comprometido con entregar los mejores resultados para cada cliente.
+              </p>
+            </div>
+
+            <ul
+              role="list"
+              class="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
+            >
+              {team_members.list.map((member: { name: string; position: string; image: string; image_position?: string }) => (
+                <li>
+                  <div class="flex items-center gap-x-6">
+                    <ImageMod
+                      src={member.image}
+                      alt={member.name}
+                      width={64}
+                      height={64}
+                      class={`size-16 rounded-full object-cover shrink-0 outline outline-1 outline-black/5 ${member.image_position ?? ""}`}
+                    />
+                    <div>
+                      <h3 class="text-base font-semibold text-text-dark">
+                        {member.name}
+                      </h3>
+                      <p class="text-sm font-semibold text-primary mt-0.5">
+                        {member.position}
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+          </div>
+        </ScrollAnimation>
+      </div>
+    </section>
+  )}
 
   <CallToAction />
 </Base>
