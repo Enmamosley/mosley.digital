@@ -47,6 +47,13 @@ export default function ScrollAnimation({
     const element = ref.current;
     const targets = stagger > 0 ? element.children : element;
 
+    // If already fully in viewport, skip animation and show immediately
+    const rect = element.getBoundingClientRect();
+    const alreadyVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+    if (alreadyVisible) {
+      return;
+    }
+
     // Animation configurations
     const animations = {
       fade: {
