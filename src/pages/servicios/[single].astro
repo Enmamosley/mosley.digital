@@ -1,8 +1,11 @@
 ---
+import IconButton from "@/components/functional-components/IconButton";
+import ImageMod from "@/components/ImageMod.astro";
 import ScrollAnimation from "@/helpers/ScrollAnimation";
 import Base from "@/layouts/Base.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import CallToAction from "@/partials/CallToAction.astro";
+import { FaCheck, FaPhone } from "react-icons/fa6";
 
 export async function getStaticPaths() {
   const services = await getSinglePage("serviceSinglePage");
@@ -58,51 +61,174 @@ const otherServices = allServices.filter((s) => s.id !== service.id).slice(0, 3)
     </div>
   </section>
 
-  {/* Pricing */}
+  {/* Pricing — estilo "Precios claros, sin sorpresas" */}
   {pricing && pricing.length > 0 && (
-    <section class="py-16">
-      <div class="container">
+    <section class="section pb-0 bg-light rounded-[60px] relative overflow-hidden" id="pricing">
+      <ImageMod
+        src="/images/shapes/dark-grid-box.png"
+        alt="shape"
+        class="size-full absolute inset-0 z-1 object-cover object-center"
+        width={1920}
+        height={1080}
+      />
+      <div class="absolute inset-0 size-full bg-linear-to-b from-light via-body via-[6.98%] to-tertiary z-0" />
+      <div class="container relative z-2">
         <ScrollAnimation client:visible>
-          <h2 class="text-2xl font-normal text-text-dark mb-10">
-            Planes y <em>precios</em>
+          <h2 class="has-em section-title text-center text-h1 mb-12">
+            Precios claros,<br/>sin <em>sorpresas</em>
           </h2>
         </ScrollAnimation>
-        <div class={`grid gap-6 ${pricing.length === 1 ? "max-w-sm" : pricing.length === 2 ? "sm:grid-cols-2 max-w-2xl" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
-          {pricing.map((plan, i) => (
-            <ScrollAnimation client:visible delay={0.08 + i * 0.08}>
-              <div class={`rounded-2xl p-6 h-full flex flex-col border ${plan.featured ? "bg-primary text-light border-primary" : "bg-light card-shadow border-dark/10"}`}>
-                <div class="mb-4">
-                  <h3 class={`text-base font-medium mb-1 ${plan.featured ? "text-light" : "text-text-dark"}`}>
-                    {plan.name}
-                  </h3>
-                  <p class={`text-sm mb-3 ${plan.featured ? "text-light/70" : "text-text-dark/60"}`}>
-                    {plan.description}
-                  </p>
-                  <p class={`text-2xl font-semibold ${plan.featured ? "text-light" : "text-text-dark"}`}>
-                    {plan.price}
-                  </p>
+
+        <div class={`grid gap-6 mb-8 ${pricing.length === 1 ? "max-w-xl mx-auto" : pricing.length === 2 ? "sm:grid-cols-2 max-w-4xl mx-auto" : "md:grid-cols-2 lg:grid-cols-3"}`}>
+          {pricing.map((plan, index) => (
+            <ScrollAnimation client:visible delay={0.1 + index * 0.1}>
+              <div class="rounded-[28px] p-6 relative overflow-hidden bg-linear-to-br from-[#faf4ff] via-[#faf4ff] to-[#cfd3ff]">
+
+                {/* Dark gradient + texture overlay for first card */}
+                {index === 0 && (
+                  <div class="absolute size-full inset-0 bg-linear-to-br from-tertiary to-secondary" />
+                )}
+                {index === 0 && (
+                  <div class="absolute size-full inset-0 mix-blend-multiply overflow-hidden">
+                    <ImageMod
+                      src="/images/shapes/pricing-shape.png"
+                      alt="shape"
+                      class="size-full object-cover object-top"
+                      width={1920}
+                      height={2080}
+                      loading="lazy"
+                    />
+                  </div>
+                )}
+                <div class="absolute size-full inset-0 overflow-hidden">
+                  <ImageMod
+                    src="/images/shapes/dark-grid-box.png"
+                    alt="shape"
+                    class="size-full object-cover"
+                    width={1920}
+                    height={1080}
+                    loading="lazy"
+                  />
                 </div>
-                <ul class="flex flex-col gap-2 mt-4 flex-1">
-                  {plan.highlights.map((item) => (
-                    <li class={`flex items-start gap-2 text-sm ${plan.featured ? "text-light/90" : "text-text-dark/80"}`}>
-                      <span class={`mt-0.5 shrink-0 ${plan.featured ? "text-light" : "text-primary"}`}>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                          <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                      </span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href="/contacto"
-                  class={`mt-6 inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-300 ${plan.featured ? "bg-light text-primary hover:bg-light/90" : "bg-primary text-light hover:bg-primary/90"}`}
+
+                {/* Header card */}
+                <div
+                  class={index === 0
+                    ? "border border-light/30 backdrop-blur-md h-min overflow-clip rounded-[18px] flex flex-col gap-4 w-full px-5 pt-5 pb-6 relative shadow-[inset_-4px_-4px_50px_#ffffff3d]"
+                    : "border border-light backdrop-blur-md h-min overflow-clip flex flex-col gap-4 bg-[#eaeaea33] rounded-[18px] w-full px-5 pt-5 pb-6 relative shadow-[inset_-4px_-4px_50px_#4141411a]"}
                 >
-                  Cotizar
-                </a>
+                  <div class="flex justify-between items-center gap-2">
+                    <p class={`text-xl font-light ${index === 0 ? "text-light" : "text-text-dark"}`}>
+                      {plan.name}
+                    </p>
+                    {plan.badge && (
+                      <p class={`border border-light/3 min-w-28 h-min z-3 bg-linear-to-b from-light/0 to-light/12 rounded-full px-3 py-2 relative shadow-[inset_4px_4px_9px_#3d3d3d1a,inset_-4px_-4px_4px_#e4e4e440,0_8px_24px_#1d1d1d0a] font-light text-center text-sm ${index === 0 ? "text-light" : "gradient-text-primary"}`}>
+                        {plan.badge}
+                      </p>
+                    )}
+                  </div>
+                  <h3 class={`text-h1 ${index === 0 ? "text-light" : "text-text-dark"}`}>
+                    <span class={index === 1 ? "gradient-text-primary" : ""}>
+                      {typeof plan.price === "number"
+                        ? `${plan.price_prefix ?? "$"}${plan.price.toLocaleString()}`
+                        : plan.price}
+                    </span>
+                    {plan.period && (
+                      <span class="text-lg font-secondary tracking-wider capitalize italic font-light inline-block ml-2">
+                        {plan.period}
+                      </span>
+                    )}
+                  </h3>
+                </div>
+
+                {/* Dashed divider */}
+                <div
+                  class={`border-t border-dashed overflow-clip flex-none w-full relative [mask:linear-gradient(90deg,#0000_0%,#000_51.4333%,#0000_100%)] my-5 h-px ${index === 0 ? "border-light" : "border-dark"}`}
+                />
+
+                {/* Features + buttons card */}
+                <div
+                  class={index === 0
+                    ? "border border-light/30 backdrop-blur-md h-min overflow-clip rounded-[18px] flex flex-col gap-4 w-full px-5 pt-5 pb-6 relative shadow-[inset_-4px_-4px_50px_#ffffff3d]"
+                    : "border border-dark/10 backdrop-blur-md h-min overflow-clip flex flex-col gap-4 bg-[#eaeaea33] rounded-[18px] w-full px-5 pt-5 pb-6 relative shadow-[inset_-4px_-4px_50px_#4141411a]"}
+                >
+                  <h3 class={`font-secondary italic text-h4 tracking-wider font-normal ${index === 0 ? "text-light" : "text-text-dark"}`}>
+                    Incluye
+                  </h3>
+                  <ul class={`flex flex-col gap-y-3 text-base ${index === 0 ? "text-light" : "text-text-dark"}`}>
+                    {plan.highlights.map((item) => (
+                      <li class="flex items-start gap-x-2">
+                        {index === 0 ? (
+                          <svg class="text-lg shrink-0 mt-1 sm:mt-0.75" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                          </svg>
+                        ) : (
+                          <ImageMod
+                            src="/images/icons/check-icon.svg"
+                            alt="check"
+                            width={24}
+                            height={24}
+                            class="w-6 h-6 shrink-0 mt-1 sm:mt-0.75"
+                          />
+                        )}
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <div class="flex justify-center items-center gap-5 mt-5 flex-wrap sm:flex-nowrap">
+                    <IconButton
+                      client:visible
+                      href={plan.button_link}
+                      classNames="w-full !rounded-2xl text-lg"
+                      variant="filled"
+                    >
+                      {plan.button_label}
+                    </IconButton>
+                    {plan.button2_link && plan.button2_label && (
+                      <IconButton
+                        client:visible
+                        href={plan.button2_link}
+                        classNames="w-full !rounded-2xl text-lg"
+                        variant="outline"
+                      >
+                        {plan.button2_label}
+                      </IconButton>
+                    )}
+                  </div>
+                </div>
+
               </div>
             </ScrollAnimation>
           ))}
+        </div>
+
+        {/* Book a call strip */}
+        <div class="pb-24">
+          <div class="rounded-[28px] px-10 pt-10 pb-8 relative overflow-hidden">
+            <div class="absolute size-full inset-0 bg-linear-to-br from-tertiary to-secondary z-0" />
+            <div class="absolute size-full inset-0 mix-blend-multiply overflow-hidden z-0">
+              <ImageMod src="/images/shapes/book-call-shape.png" alt="shape" class="size-full object-cover object-center" width={1920} height={2080} loading="lazy" />
+            </div>
+            <div class="absolute size-full inset-0 overflow-hidden z-0">
+              <ImageMod src="/images/shapes/dark-grid-box.png" alt="shape" class="size-full object-cover" width={1920} height={1080} loading="lazy" />
+            </div>
+            <div class="flex justify-between items-center flex-wrap gap-y-8 relative z-4">
+              <div class="flex flex-col gap-y-4">
+                <h2 class="text-light text-h3 has-em">¿No sabes cuál plan es para ti?<br/><em>Platiquemos 15 minutos</em></h2>
+                <ul class="flex items-center gap-4 flex-wrap">
+                  {["Sin costo y sin compromiso", "Respuesta en menos de 24 horas"].map((item) => (
+                    <li class="text-text-light text-xl flex items-center gap-2">
+                      <FaCheck className="inline-block text-lg shrink-0" />{item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <IconButton client:visible href="/contacto" variant="filled" classNames="shrink-0">
+                <FaPhone className="inline-block mr-2 text-lg" />
+                Contactar ahora
+              </IconButton>
+            </div>
+          </div>
         </div>
       </div>
     </section>
