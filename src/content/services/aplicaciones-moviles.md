@@ -22,15 +22,18 @@ features:
 
 pricing:
   - name: "App Multiplataforma"
-    price: "Desde $50,000 MXN"
-    description: "iOS + Android en un solo desarrollo"
+    badge: "iOS + Android"
+    price: 58000
+    price_prefix: "$"
+    period: "MXN c/IVA"
     highlights:
       - "Diseño UI/UX incluido"
-      - "iOS y Android simultáneo"
-      - "Publicación en App Stores"
+      - "iOS y Android en un solo desarrollo"
+      - "Publicación en App Store y Google Play"
       - "Integración con APIs y sistemas web"
-      - "Soporte post-lanzamiento"
-    featured: true
+      - "Soporte post-lanzamiento incluido"
+    button_label: "Contratar ahora"
+    button_link: "https://app.mosley.digital/buy/app-multiplataforma"
 
 faq:
   - question: "¿Cuánto tiempo tarda desarrollar una app?"

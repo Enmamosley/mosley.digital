@@ -21,16 +21,19 @@ features:
     description: "Primera entrega funcional en semanas, no meses. Cada fase te da valor real y la retroalimentación orienta las siguientes entregas."
 
 pricing:
-  - name: "Proyecto por Fases"
-    price: "Desde $39,900 MXN"
-    description: "Cotización personalizada según alcance"
+  - name: "Sistema Web a Medida"
+    badge: "Por fases"
+    price: 116000
+    price_prefix: "$"
+    period: "MXN c/IVA"
     highlights:
-      - "Análisis y diseño de arquitectura"
-      - "Primera fase entregable en 4-6 semanas"
+      - "Análisis y diseño de arquitectura incluido"
+      - "Primera fase entregable en 4–6 semanas"
       - "Panel de administración incluido"
-      - "Integraciones CFDI y APIs"
+      - "Integraciones CFDI 4.0 y APIs externas"
       - "Soporte continuo y mejoras evolutivas"
-    featured: true
+    button_label: "Contratar ahora"
+    button_link: "https://app.mosley.digital/buy/sistema-web-a-medida"
 
 faq:
   - question: "¿Cómo funciona el desarrollo por fases?"

@@ -21,26 +21,31 @@ features:
     description: "Administra la información de tu tarjeta, ve cuántas veces fue compartida y configura qué datos aparecen para cada contacto."
 
 pricing:
-  - name: "Individual"
-    price: "Desde $890 MXN"
-    description: "Para profesionistas y emprendedores"
+  - name: "Tarjeta Individual"
+    badge: "1 tarjeta NFC"
+    price: 890
+    price_prefix: "$"
+    period: "MXN desde"
     highlights:
-      - "1 tarjeta física NFC"
+      - "1 tarjeta física con chip NFC"
       - "Código QR incluido"
-      - "Diseño personalizado"
-      - "Panel de gestión"
+      - "Diseño personalizado a tu marca"
+      - "Panel de gestión de contenido"
       - "Actualizaciones ilimitadas"
-    featured: false
-  - name: "Empresarial"
-    price: "Cotización por volumen"
-    description: "Para equipos de ventas y empresas"
+    button_label: "Solicitar cotización"
+    button_link: "/contacto"
+  - name: "Paquete Empresarial"
+    badge: "5+ tarjetas"
+    price: "Cotización"
+    period: "por volumen"
     highlights:
-      - "5+ tarjetas NFC"
+      - "5 o más tarjetas NFC"
       - "Diseño corporativo unificado"
       - "Panel de gestión por equipo"
       - "Análisis de interacciones"
       - "Descuento por volumen"
-    featured: true
+    button_label: "Solicitar cotización"
+    button_link: "/contacto"
 
 faq:
   - question: "¿Funciona en cualquier celular?"

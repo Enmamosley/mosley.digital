@@ -1,7 +1,7 @@
 ---
 title: "Soporte Técnico"
 meta_title: "Soporte Técnico y Mantenimiento Web | Mosley Digital"
-description: "Mantenimiento mensual, actualizaciones, respaldos y soporte técnico para tu sitio web o sistema. Tu operación digital siempre en línea desde $3,000 MXN/mes."
+description: "Mantenimiento mensual, actualizaciones, respaldos y soporte técnico para tu sitio web o sistema. Tu operación digital siempre en línea desde $3,480 MXN/mes."
 draft: false
 subtitle: "Tu sitio siempre en línea, nosotros nos encargamos"
 intro: "Un sitio web o sistema sin mantenimiento es un sitio que eventualmente falla. Actualizaciones de seguridad pendientes, plugins desactualizados, errores acumulados — todo resulta en tiempo sin servicio cuando menos lo esperas. Nuestro servicio de soporte técnico mantiene tu operación digital sin interrupciones."
@@ -21,25 +21,33 @@ features:
     description: "Pequeños cambios y mejoras al sistema según van surgiendo necesidades. Sin costo extra por ajustes menores dentro del alcance del contrato."
 
 pricing:
-  - name: "Soporte Básico"
-    price: "$3,480 MXN/mes"
-    description: "Mantenimiento y soporte esencial"
+  - name: "Soporte Mensual"
+    badge: "Recurrente"
+    price: 3480
+    price_prefix: "$"
+    period: "MXN / mes c/IVA"
     highlights:
-      - "Mantenimiento mensual"
-      - "Respaldos automáticos"
-      - "Corrección de bugs"
+      - "Mantenimiento mensual completo"
+      - "Respaldos automáticos diarios"
+      - "Corrección de bugs incluida"
       - "Actualizaciones de seguridad"
       - "Acceso a área de clientes"
-    featured: false
+    button_label: "Contratar ahora"
+    button_link: "https://app.mosley.digital/buy/soporte-mensual-basico"
+    button2_label: "Área de clientes"
+    button2_link: "https://app.mosley.digital"
   - name: "Consultoría por Hora"
-    price: "$928 MXN/hora"
-    description: "Asesoría técnica cuando la necesitas"
+    badge: "Sin contrato"
+    price: 928
+    price_prefix: "$"
+    period: "MXN / hora c/IVA"
     highlights:
       - "Desarrollador senior disponible"
       - "Sin cita previa necesaria"
-      - "Factura CFDI"
+      - "Factura CFDI incluida"
       - "Comunicación directa sin intermediarios"
-    featured: false
+    button_label: "Contratar ahora"
+    button_link: "https://app.mosley.digital/buy/consultoria-tecnica-hora"
 
 faq:
   - question: "¿Cuánto tiempo tardan en atender un bug reportado?"

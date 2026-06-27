@@ -21,16 +21,18 @@ features:
     description: "Importamos tu historial de hojas de cálculo, sistemas anteriores o bases de datos a la nueva plataforma sin perder información."
 
 pricing:
-  - name: "Consultoría y Cotización"
-    price: "Precio según alcance"
-    description: "Proyectos de automatización son únicos — cotizamos después de entender tu operación"
+  - name: "ERP / Sistema a Medida"
+    badge: "Proyecto complejo"
+    price: "Cotización"
+    period: "personalizada"
     highlights:
-      - "Análisis de procesos incluido"
-      - "Propuesta técnica detallada"
-      - "Desarrollo por fases"
-      - "Capacitación del equipo"
-      - "Soporte y mejoras continuas"
-    featured: true
+      - "Implementación y configuración de Odoo ERP"
+      - "Módulos personalizados (Python, XML, JS)"
+      - "Facturación CFDI 4.0 y Carta Porte 3.1"
+      - "Migraciones de datos y automatizaciones"
+      - "Capacitación del equipo incluida"
+    button_label: "Agendar llamada técnica"
+    button_link: "/contacto"
 
 faq:
   - question: "¿Qué es Odoo y por qué usarlo?"

@@ -17,6 +17,9 @@ const homepage = await getListPage("homePage", "-index");
 const { banner, features, the_standard, recent_work, ready_to_choose_us } =
   homepage.data;
 
+const meta_title = "Desarrollo Web para Pymes en México | Mosley Digital Services";
+const description = "Diseñamos y desarrollamos sitios web, e-commerce y apps que convierten visitantes en clientes. Sitios corporativos, landing pages y sistemas a medida. Monterrey, México.";
+
 const workList = (await getSinglePage("workSinglePage")).sort((a, b) => {
   const wa = a.data.weight ?? 99;
   const wb = b.data.weight ?? 99;
@@ -24,7 +27,7 @@ const workList = (await getSinglePage("workSinglePage")).sort((a, b) => {
 });
 ---
 
-<Base>
+<Base meta_title={meta_title} description={description}>
   <Hero banner={banner} features={features} />
   <TheStandard data={the_standard} />
   <WorkGrid data={recent_work} work={workList} />

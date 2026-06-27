@@ -22,25 +22,30 @@ features:
 
 pricing:
   - name: "Diseño UI/UX"
-    price: "Incluido en proyectos web"
-    description: "Incluido en todos nuestros proyectos de desarrollo"
+    badge: "Proyecto único"
+    price: 4900
+    price_prefix: "$"
+    period: "MXN desde"
     highlights:
       - "Diseño completo en Figma"
-      - "Prototipo navegable"
-      - "Hasta 2 rondas de revisión"
-      - "Entrega de assets para desarrollo"
-      - "Guía de estilos básica"
-    featured: false
-  - name: "Paquete Marketing Digital"
-    price: "Cotización personalizada"
-    description: "Estrategia + ejecución mensual"
+      - "Prototipo navegable y entregable"
+      - "Hasta 2 rondas de revisión incluidas"
+      - "Entrega de assets listos para desarrollo"
+      - "Guía de estilos y componentes"
+    button_label: "Solicitar cotización"
+    button_link: "/contacto"
+  - name: "Marketing Digital"
+    badge: "Mensual"
+    price: "Cotización"
+    period: "personalizada"
     highlights:
-      - "SEO técnico y de contenido"
+      - "SEO técnico y estrategia de contenido"
       - "Gestión de redes sociales"
-      - "Campañas Google/Meta Ads"
+      - "Campañas Google Ads y Meta Ads"
       - "Reporte mensual de resultados"
-      - "Consultoría estratégica"
-    featured: true
+      - "Consultoría estratégica mensual incluida"
+    button_label: "Solicitar cotización"
+    button_link: "/contacto"
 
 faq:
   - question: "¿Cuánto tiempo tarda en verse resultados de SEO?"

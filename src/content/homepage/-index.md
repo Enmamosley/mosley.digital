@@ -1,4 +1,7 @@
 ---
+meta_title: "Desarrollo Web para Pymes en México | Mosley Digital Services"
+description: "Diseñamos y desarrollamos sitios web, e-commerce y apps que convierten visitantes en clientes. Sitios corporativos, landing pages y sistemas a medida. Monterrey, México."
+
 # Banner
 banner:
   title: |

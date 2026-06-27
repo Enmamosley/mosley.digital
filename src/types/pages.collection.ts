@@ -28,6 +28,8 @@ export const button = z.object({
 export const homePage = defineCollection({
   loader: glob({ pattern: "**/-*.{md,mdx}", base: "src/content/homepage" }),
   schema: z.object({
+    meta_title: z.string().optional(),
+    description: z.string().optional(),
     banner: z.object({
       title: z.string(),
       content: z.string(),
@@ -210,10 +212,15 @@ export const serviceSinglePage = defineCollection({
     })),
     pricing: z.array(z.object({
       name: z.string(),
-      price: z.string(),
-      description: z.string(),
+      badge: z.string().optional(),
+      price: z.union([z.number(), z.string()]),
+      price_prefix: z.string().optional().default("$"),
+      period: z.string().optional(),
       highlights: z.array(z.string()),
-      featured: z.boolean().optional().default(false),
+      button_label: z.string().default("Solicitar cotización"),
+      button_link: z.string().default("/contacto"),
+      button2_label: z.string().optional(),
+      button2_link: z.string().optional(),
     })).optional(),
     faq: z.array(z.object({
       question: z.string(),

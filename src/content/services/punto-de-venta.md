@@ -22,16 +22,21 @@ features:
 
 pricing:
   - name: "POS + E-Commerce"
-    price: "Desde $39,900 MXN"
-    description: "Sistema completo integrado, entregado por fases"
+    badge: "Sistema completo"
+    price: 39900
+    price_prefix: "$"
+    period: "MXN desde · por fases"
     highlights:
       - "Punto de venta en mostrador"
       - "Tienda en línea integrada"
-      - "Facturación CFDI 4.0"
-      - "Control de inventario"
-      - "Panel de administración"
-      - "Entrega primera fase en 4-6 semanas"
-    featured: true
+      - "Facturación CFDI 4.0 incluida"
+      - "Control de inventario unificado"
+      - "Panel de administración y reportes"
+      - "Primera fase en 4–6 semanas"
+    button_label: "Solicitar cotización"
+    button_link: "/contacto"
+    button2_label: "Área de clientes"
+    button2_link: "https://app.mosley.digital"
 
 faq:
   - question: "¿Funciona sin internet?"

@@ -4,7 +4,7 @@ meta_title: "Equipo Técnico y Licencias de Software | Mosley Digital"
 description: "Staff augmentation, licencias de software empresarial y gestión de tecnología para empresas en México. El equipo técnico que necesitas sin la complejidad de contratar."
 draft: false
 subtitle: "El equipo técnico que necesitas, sin la complejidad de contratar"
-intro: "Crecer un equipo de tecnología es costoso y lento. Encontrar talento calificado, capacitarlo y retenerlo puede tomare meses. Con nuestro servicio de Equipo y Software, accedes a desarrolladores, diseñadores y especialistas técnicos de manera flexible — solo cuando los necesitas y en la escala que requiere tu proyecto."
+intro: "Crecer un equipo de tecnología es costoso y lento. Encontrar talento calificado, capacitarlo y retenerlo puede tomar meses. Con nuestro servicio de Equipo y Software, accedes a desarrolladores, diseñadores y especialistas técnicos de manera flexible — solo cuando los necesitas y en la escala que requiere tu proyecto."
 
 features:
   - title: "Staff Augmentation"
@@ -22,24 +22,29 @@ features:
 
 pricing:
   - name: "Consultoría Técnica"
-    price: "$928 MXN/hora"
-    description: "Acceso directo a expertos técnicos por hora"
+    badge: "Por hora"
+    price: 928
+    price_prefix: "$"
+    period: "MXN / hora c/IVA"
     highlights:
-      - "Desarrolladores senior disponibles"
+      - "Desarrollador senior disponible"
       - "Sin capas de administración"
       - "Respuesta en el mismo día hábil"
       - "Factura CFDI incluida"
-    featured: false
+    button_label: "Contratar ahora"
+    button_link: "https://app.mosley.digital/buy/consultoria-tecnica-hora"
   - name: "Equipo Dedicado"
-    price: "Cotización mensual"
-    description: "Tu equipo técnico externo de manera continua"
+    badge: "Personalizado"
+    price: "Cotización"
+    period: "mensual"
     highlights:
       - "1 o más especialistas dedicados"
       - "Integración con tu equipo interno"
       - "Reporte semanal de avances"
       - "Flexibilidad para escalar o reducir"
       - "Sin costos de contratación ni prestaciones"
-    featured: true
+    button_label: "Solicitar cotización"
+    button_link: "/contacto"
 
 faq:
   - question: "¿En qué se diferencia de contratar a un freelancer?"

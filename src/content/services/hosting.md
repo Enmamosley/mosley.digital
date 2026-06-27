@@ -22,35 +22,44 @@ features:
 
 pricing:
   - name: "Correo Básico"
-    price: "$578.84 MXN"
-    description: "Para emprendedores y startups"
+    badge: "2 cuentas"
+    price: 579
+    price_prefix: "$"
+    period: "MXN / año c/IVA"
     highlights:
-      - "2 cuentas de correo"
-      - "Dominio incluido"
-      - "10 GB por buzón"
-      - "Webmail y acceso móvil"
-      - "Seguridad incluida"
-    featured: false
+      - "2 cuentas de correo @tudominio"
+      - "Dominio .com o .net incluido por 1 año"
+      - "10 GB de almacenamiento por buzón"
+      - "Acceso vía Webmail, Outlook y móvil"
+      - "Antispam, antivirus y SSL incluidos"
+    button_label: "Contratar ahora"
+    button_link: "https://app.mosley.digital/buy/Correo-basico"
   - name: "Profesional 1 Año"
-    price: "$1,798 MXN"
-    description: "La opción más popular para empresas"
+    badge: "Más popular"
+    price: 1798
+    price_prefix: "$"
+    period: "MXN / año c/IVA"
     highlights:
-      - "Cuentas ilimitadas"
-      - "Dominio incluido por 1 año"
-      - "10 GB por buzón"
-      - "Antispam + Antivirus + SSL"
-      - "Outlook, Webmail y móvil"
-    featured: true
+      - "Cuentas ilimitadas @tudominio"
+      - "Dominio .com o .net incluido por 1 año"
+      - "10 GB de almacenamiento por buzón"
+      - "Acceso vía Webmail, Outlook y móvil"
+      - "Antispam, antivirus y SSL incluidos"
+    button_label: "Contratar ahora"
+    button_link: "https://app.mosley.digital/buy/correo-profesional-1-ano"
   - name: "Profesional 3 Años"
-    price: "$3,016 MXN"
-    description: "Ahorra con el plan extendido"
+    badge: "Mejor precio"
+    price: 3016
+    price_prefix: "$"
+    period: "MXN / 3 años c/IVA"
     highlights:
-      - "Cuentas ilimitadas"
-      - "Dominio incluido por 3 años"
-      - "10 GB por buzón"
-      - "Antispam + Antivirus + SSL"
-      - "Mejor precio por año"
-    featured: false
+      - "Cuentas ilimitadas @tudominio"
+      - "Dominio .com o .net incluido por 3 años"
+      - "10 GB de almacenamiento por buzón"
+      - "Acceso vía Webmail, Outlook y móvil"
+      - "Antispam, antivirus y SSL incluidos"
+    button_label: "Contratar ahora"
+    button_link: "https://app.mosley.digital/buy/correo-profesional-3-anos"
 
 faq:
   - question: "¿Cuántas cuentas puedo crear?"
