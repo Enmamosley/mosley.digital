@@ -171,7 +171,7 @@ const otherServices = allServices.filter((s) => s.id !== service.id).slice(0, 3)
             {otherServices.map((s, i) => (
               <ScrollAnimation client:visible delay={0.08 + i * 0.08}>
                 <a
-                  href={`/services/${s.id}`}
+                  href={`/servicios/${s.id}`}
                   class="group bg-light card-shadow relative flex min-h-24 w-full items-center overflow-hidden rounded-2xl py-5 pr-10 pl-6 transition-all duration-500 hover:-translate-y-1 border border-dark/10"
                 >
                   <span class="bg-primary/60 group-hover:bg-primary absolute top-5 bottom-5 left-3 w-1 rounded-full transition-all duration-500 group-hover:top-4 group-hover:bottom-4"></span>
