@@ -14,7 +14,7 @@ project_info:
   role: ["Desarrollo Web", "WordPress", "Elementor"]
   recognition: Monterrey, NL
   year: 2025
-  link: "https://ngimty.org"
+  link: "https://www.ngimty.org"
   domain: "ngimty.org"
 project_gallery_images:
   - "/images/work/ngimty/1.png"

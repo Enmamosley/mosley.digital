@@ -11,7 +11,7 @@ banner:
   content: Sitios corporativos, ecommerce y web apps para pymes que quieren crecer en serio.
   badge: "Mosley Digital Services"
   button:
-    enable: true
+    enable: false
     label: "Ver precios"
     icon: FaCircleDollarToSlot
     link: "#pricing"
