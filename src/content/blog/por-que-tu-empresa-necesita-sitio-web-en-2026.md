@@ -3,7 +3,7 @@ title: "¿Por qué tu empresa necesita un sitio web profesional en 2026?"
 meta_title: "¿Por qué tu empresa necesita sitio web en 2026? | Mosley Digital"
 description: "Un sitio web profesional ya no es un lujo: es el activo digital más importante de tu empresa. Te explicamos por qué y qué debe tener el tuyo."
 date: 2026-01-15T09:00:00Z
-image: "/images/blog/emerging-trends.png"
+image: "/images/blog/por-que-tu-empresa-necesita-sitio-web-en-2026.png"
 tags: ["Desarrollo Web", "Negocios Digitales"]
 draft: false
 ---

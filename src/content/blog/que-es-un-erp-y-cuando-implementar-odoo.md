@@ -3,7 +3,7 @@ title: "¿Qué es un ERP y cuándo tu empresa está lista para implementar Odoo?
 meta_title: "¿Qué es un ERP y cuándo implementar Odoo? | Mosley Digital Services"
 description: "Odoo ERP puede transformar la operación de tu empresa, pero no todas las empresas están listas al mismo tiempo. Te explicamos cuándo y cómo dar el salto."
 date: 2026-03-05T09:00:00Z
-image: "/images/blog/key-trends.png"
+image: "/images/blog/que-es-un-erp-y-cuando-implementar-odoo.png"
 tags: ["Odoo ERP", "Automatización", "Negocios Digitales"]
 draft: false
 ---

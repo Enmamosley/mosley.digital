@@ -3,7 +3,7 @@ title: "Google Workspace vs. correo profesional: ahorra hasta $20,000 MXN en 3 a
 meta_title: "Google Workspace vs correo profesional propio: comparativa real | Mosley Digital"
 description: "¿Vale la pena pagar por Google Workspace? Comparamos costos reales y te mostramos cómo tener correo @tuempresa.com por mucho menos."
 date: 2026-02-10T09:00:00Z
-image: "/images/blog/future-insights.png"
+image: "/images/blog/google-workspace-vs-correo-profesional-comparativa.png"
 tags: ["Correo Profesional", "Herramientas Digitales"]
 draft: false
 ---
