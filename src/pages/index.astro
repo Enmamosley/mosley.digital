@@ -7,7 +7,6 @@ import ChooseUs from "@/partials/ChooseUs.astro";
 import FAQs from "@/partials/FAQs.astro";
 import GetProjectDone from "@/partials/GetProjectDone.astro";
 import Hero from "@/partials/Hero.astro";
-import Pricing from "@/partials/Pricing.astro";
 import Testimonial from "@/partials/Testimonial.astro";
 import TheStandard from "@/partials/TheStandard.astro";
 import WorkGrid from "@/partials/WorkGrid.astro";
@@ -34,7 +33,6 @@ const workList = (await getSinglePage("workSinglePage")).sort((a, b) => {
   <BookCall />
   <GetProjectDone />
   <Testimonial isHome={true} />
-  <Pricing />
   <ChooseUs data={ready_to_choose_us} />
   <FAQs />
   <CallToAction />
