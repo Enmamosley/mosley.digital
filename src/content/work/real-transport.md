@@ -7,6 +7,7 @@ image: "/images/work/real-transport/1.png"
 draft: true
 weight: 6
 display_mode: showcase
+category: sitios-web
 color_shape: "#4f46e5"
 project_info:
   client: Real Transport

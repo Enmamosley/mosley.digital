@@ -7,6 +7,7 @@ image: "/images/work/ticmans/1.png"
 draft: false
 weight: 9
 display_mode: showcase
+category: sitios-web
 color_shape: "#6366f1"
 project_info:
   client: Ticmans

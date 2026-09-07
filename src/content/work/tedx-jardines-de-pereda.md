@@ -7,6 +7,7 @@ image: "/images/work/tedx/01.png"
 draft: false
 weight: 12
 display_mode: showcase
+category: sitios-web
 color_shape: "#e11d48"
 project_info:
   client: TEDx Jardines de Pereda

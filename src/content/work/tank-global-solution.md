@@ -7,6 +7,7 @@ image: "/images/work/tank-global-solution/1.png"
 draft: false
 weight: 4
 display_mode: showcase
+category: sitios-web
 color_shape: "#10b981"
 project_info:
   client: Tank Global Solution

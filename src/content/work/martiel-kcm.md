@@ -7,14 +7,15 @@ image: "/images/work/martiel-kcm/1.png"
 draft: false
 weight: 5
 display_mode: showcase
+category: sitios-web
 color_shape: "#f59e0b"
 project_info:
   client: Martiel KCM
   role: ["Desarrollo Web", "Diseño UI/UX"]
   recognition: Monterrey, NL
   year: 2024
-  link: "https://martielkcm.com"
-  domain: "martielkcm.com"
+  link: "https://martielv2.vercel.app"
+  domain: "martielv2.vercel.app"
 project_gallery_images:
   - "/images/work/martiel-kcm/1.png"
   - "/images/work/martiel-kcm/2.png"

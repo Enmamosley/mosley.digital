@@ -8,6 +8,7 @@ draft: false
 weight: 5
 featured: true
 display_mode: gallery
+category: plataformas
 color_shape: "#2563eb"
 project_info:
   client: WCG Servicios de Construcción

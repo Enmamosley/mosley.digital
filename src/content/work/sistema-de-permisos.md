@@ -8,6 +8,7 @@ draft: false
 weight: 2
 featured: true
 display_mode: gallery
+category: plataformas
 color_shape: "#7c3aed"
 project_info:
   client: Pabellón M

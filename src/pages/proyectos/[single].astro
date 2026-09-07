@@ -65,6 +65,30 @@ const otherWork = allWork.filter((w) => w.id !== work.id).slice(0, 3);
                     <span class="text-sm text-text-dark/50 shrink-0">Año</span>
                     <span class="text-sm text-text-dark text-right min-w-0">{project_info?.year}</span>
                   </div>
+                  {(project_info?.app_store || project_info?.play_store) && (
+                    <div class="flex flex-col gap-2 pt-3 mt-1 border-t border-dark/10">
+                      {project_info?.app_store && (
+                        <a
+                          href={project_info.app_store}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="btn btn-outline-primary button-grab-effect text-center"
+                        >
+                          Descargar en App Store
+                        </a>
+                      )}
+                      {project_info?.play_store && (
+                        <a
+                          href={project_info.play_store}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="btn btn-outline-primary button-grab-effect text-center"
+                        >
+                          Descargar en Google Play
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
 

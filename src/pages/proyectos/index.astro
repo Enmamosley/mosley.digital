@@ -1,10 +1,31 @@
 ---
 import WorkCard from "@/components/WorkCard.astro";
+import Title from "@/components/Title.astro";
 import ScrollAnimation from "@/helpers/ScrollAnimation";
 import Base from "@/layouts/Base.astro";
 import { getListPage, getSinglePage } from "@/lib/contentParser.astro";
 import CallToAction from "@/partials/CallToAction.astro";
 import PageHeader from "@/partials/PageHeader.astro";
+import type { CollectionEntry } from "astro:content";
+
+type WorkCategory = NonNullable<
+  CollectionEntry<"workSinglePage">["data"]["category"]
+>;
+
+const workCategories: { id: WorkCategory; label: string; title: string }[] = [
+  { id: "sitios-web", label: "Sitios web", title: "Sitios <em>web</em>" },
+  {
+    id: "tiendas-en-linea",
+    label: "Tiendas en línea",
+    title: "Tiendas en <em>línea</em>",
+  },
+  { id: "plataformas", label: "Plataformas", title: "<em>Plataformas</em>" },
+  {
+    id: "aplicaciones-moviles",
+    label: "Aplicaciones móviles",
+    title: "Aplicaciones <em>móviles</em>",
+  },
+];
 
 const pageIndex = await getListPage("workListPage", "-index");
 if (pageIndex.data.draft) {
@@ -17,6 +38,13 @@ const workList = (await getSinglePage("workSinglePage")).sort((a, b) => {
   return wa - wb;
 });
 
+const workByCategory = new Map<WorkCategory, typeof workList>(
+  workCategories.map(({ id }) => [id, []]),
+);
+for (const work of workList) {
+  workByCategory.get(work.data.category)?.push(work);
+}
+
 const { title, page_header } = pageIndex.data;
 ---
 
@@ -27,19 +55,60 @@ const { title, page_header } = pageIndex.data;
     badge={page_header?.badge}
   />
 
-  <section class="pb-20">
+  {/* Category navigation */}
+  <nav class="pb-12">
     <div class="container">
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <ul class="flex flex-wrap justify-center gap-3">
         {
-          workList.map((work, index) => (
-            <ScrollAnimation client:visible delay={0.1 + index * 0.08}>
-              <WorkCard work={work} compact />
-            </ScrollAnimation>
+          workCategories.map(({ id, label }) => (
+            <li>
+              <a
+                href={`#${id}`}
+                class="inline-flex items-center gap-2 rounded-full border border-dark/15 bg-light px-4 py-2.5 text-sm text-text-dark/80 transition-colors hover:border-primary hover:text-text-dark"
+              >
+                <span class="size-1.75 rounded-full bg-primary" />
+                {label}
+              </a>
+            </li>
           ))
         }
-      </div>
+      </ul>
     </div>
-  </section>
+  </nav>
+
+  {
+    workCategories.map(({ id, title }) => {
+      const items = workByCategory.get(id) ?? [];
+      return (
+        <section id={id} class="pb-20 scroll-mt-28">
+          <div class="container">
+            <div class="mb-10">
+              <ScrollAnimation client:visible>
+                <Title title={title} />
+              </ScrollAnimation>
+            </div>
+
+            {items.length > 0 ? (
+              <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {items.map((work, index) => (
+                  <ScrollAnimation client:visible delay={0.1 + index * 0.08}>
+                    <WorkCard work={work} compact />
+                  </ScrollAnimation>
+                ))}
+              </div>
+            ) : (
+              <div class="rounded-3xl border border-dashed border-dark/20 bg-light/50 px-6 py-14 text-center">
+                <p class="text-text-dark/60">
+                  Estamos preparando los casos de éxito de esta categoría.
+                  Próximamente.
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
+      );
+    })
+  }
 
   <CallToAction />
 </Base>

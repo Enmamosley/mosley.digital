@@ -8,6 +8,7 @@ draft: false
 weight: 6
 featured: true
 display_mode: gallery
+category: aplicaciones-moviles
 color_shape: "#7c3aed"
 project_info:
   client: Pabellón M

@@ -7,6 +7,7 @@ image: ""
 draft: true
 weight: 11
 display_mode: showcase
+category: sitios-web
 color_shape: "#22c55e"
 project_info:
   client: Hosting Libre

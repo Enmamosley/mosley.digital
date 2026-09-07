@@ -7,6 +7,7 @@ image: "/images/work/registro-campo/1.png"
 draft: true
 weight: 7
 display_mode: gallery
+category: plataformas
 color_shape: "#10b981"
 project_info:
   client: Organización de campo

@@ -8,6 +8,7 @@ draft: false
 weight: 1
 featured: true
 display_mode: gallery
+category: plataformas
 color_shape: "#0ea5e9"
 project_info:
   client: Empresa de Transporte de Carga

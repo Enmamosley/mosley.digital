@@ -4,10 +4,11 @@ subtitle: Réplica pixel-perfect del sitio web de Pabellón M — un desarrollo 
 meta_title: "Pabellón M — Sitio Web con Animaciones Avanzadas | Mosley Digital Services"
 description: "Réplica pixel-perfect de pabellonm.com con Astro 6, Tailwind CSS 4 y animaciones GSAP ScrollTrigger. Directorio de negocios y mapa interactivo por pisos."
 image: "/images/work/pabellon-m/1.png"
-draft: false
+draft: true
 weight: 3
 featured: true
 display_mode: showcase
+category: sitios-web
 color_shape: "#f43f5e"
 project_info:
   client: Pabellón M
