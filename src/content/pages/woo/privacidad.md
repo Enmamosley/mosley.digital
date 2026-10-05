@@ -8,13 +8,13 @@ page_header:
   badge: "App Mosley Digital"
 ---
 
-Última actualización: [COMPLETAR: fecha de publicación]
+Última actualización: 5 de octubre de 2026
 
 ## Quién es el responsable
 
-[COMPLETAR: razón social], con domicilio en [COMPLETAR: domicilio], es responsable de la app Mosley Digital y del servicio del Asistente.
+Mosley Digital Services, con domicilio en Palma Datilera 206, Residencial Centrika, 64520 Monterrey, Nuevo León, México, es responsable de la app Mosley Digital y del servicio del Asistente.
 
-Contacto para privacidad: [COMPLETAR: correo electrónico].
+Contacto para privacidad: hola@mosley.digital.
 
 ## Qué es la app
 
@@ -54,8 +54,11 @@ Cuando lo usas, se envían:
 
 Esos datos viajan de tu tienda al servicio de Mosley Digital y de ahí al proveedor de inteligencia artificial:
 
-- **Servicio de Mosley Digital.** Recibe la petición y la reenvía. No guarda el contenido de las conversaciones. Sí registra datos técnicos de uso: fecha, tienda, modelo utilizado, número de tokens y duración. Servidores en [COMPLETAR: país del servidor].
-- **Proveedor de inteligencia artificial.** Hoy es GLM, de Zhipu AI, con sede en China. Procesa los mensajes, las fotos y los datos consultados para generar la respuesta. Esto supone una transferencia internacional de datos. [COMPLETAR: condiciones del proveedor sobre conservación y uso de los datos, y enlace a su política.]
+- **Servicio de Mosley Digital.** Recibe la petición y la reenvía. No guarda el contenido de las conversaciones. Sí registra datos técnicos de uso: fecha, tienda, modelo utilizado, número de tokens y duración. Servidores en Estados Unidos.
+- **Proveedores de inteligencia artificial.** Hoy son tres, y cada uno recibe solo lo que necesita para su parte. Esto supone una transferencia internacional de datos.
+  - **DeepInfra** (DeepInfra, Inc., Estados Unidos) procesa tus mensajes y los datos de tu tienda que el Asistente consulta, para generar la respuesta. Según su política, no guarda esos datos ni los usa para entrenar modelos: https://deepinfra.com/privacy.
+  - **Z.ai** (Jingsheng Hengxing Technology Pte. Ltd., Singapur), con los modelos GLM de Zhipu AI, analiza las fotos que adjuntas y redacta los textos de un producto nuevo. Según su política, no guarda el contenido que procesa por su API: https://docs.z.ai/legal-agreement/privacy-policy.
+  - **SiliconFlow** (SiliconFlow Labs Pte. Ltd., Singapur) solo interviene, en esas mismas tareas de fotos y textos de producto, cuando Z.ai no responde: https://docs.siliconflow.com/en/legals/privacy-policy.
 
 La conversación se guarda en tu propia tienda (en WordPress), asociada a tu usuario, para que la veas igual en la app y en el panel de administración. Puedes borrarla con «Nueva conversación».
 
@@ -93,12 +96,12 @@ Los datos de tus clientes pertenecen a tu tienda, y tú eres responsable de ello
 ## Conservación
 
 - Los datos del teléfono se conservan hasta que desconectas la tienda o desinstalas la app.
-- Los registros técnicos del servicio se conservan [COMPLETAR: plazo].
-- Los reportes de respuestas se conservan [COMPLETAR: plazo].
+- Los registros técnicos del servicio se conservan 12 meses.
+- Los reportes de respuestas se conservan 12 meses.
 
 ## Tus derechos
 
-Puedes pedir acceso, rectificación, cancelación u oposición sobre tus datos escribiendo a [COMPLETAR: correo electrónico]. Responderemos en los plazos que marca la ley aplicable. [COMPLETAR: referencia a la ley que corresponda, por ejemplo la LFPDPPP en México.]
+Puedes pedir acceso, rectificación, cancelación u oposición sobre tus datos escribiendo a hola@mosley.digital. Son tus derechos ARCO conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares, de México. Responderemos en los plazos que marca esa ley.
 
 ## Menores
 
