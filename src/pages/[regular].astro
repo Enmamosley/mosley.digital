@@ -6,7 +6,11 @@ import { render } from "astro:content";
 
 // get static paths for all pages
 export async function getStaticPaths() {
-  const pages = await getSinglePage("regularpage");
+  // Los ids con subcarpeta (p. ej. "woo/privacidad") no caben en un solo
+  // parámetro de ruta: se renderizan desde su propia página dedicada.
+  const pages = (await getSinglePage("regularpage")).filter(
+    (page) => !page.id.includes("/"),
+  );
 
   const paths = pages.map((page) => ({
     params: {

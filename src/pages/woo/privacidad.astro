@@ -1,0 +1,32 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+import { getEntry, render } from "astro:content";
+
+// Política de privacidad de la app: contenido en
+// src/content/pages/woo/privacidad.md, con ruta propia anidada.
+const page = await getEntry("regularpage", "woo/privacidad");
+
+if (!page || page.data.draft) {
+  return Astro.redirect("/404");
+}
+
+const { Content } = await render(page);
+const { title, page_header } = page.data;
+---
+
+<Base {...page.data}>
+  <PageHeader
+    title={page_header?.title || title}
+    subtitle={page_header?.subtitle}
+    badge={page_header?.badge}
+  />
+  <section class="section">
+    <div class="container">
+      <div class="content">
+        <Content />
+      </div>
+    </div>
+  </section>
+</Base>
