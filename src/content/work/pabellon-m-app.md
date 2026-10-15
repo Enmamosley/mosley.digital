@@ -20,4 +20,6 @@ project_gallery_images:
   - "/images/work/pabellon-m-app/2.png"
   - "/images/work/pabellon-m-app/3.png"
   - "/images/work/pabellon-m-app/4.png"
+  - "/images/work/pabellon-m-app/5.png"
+  - "/images/work/pabellon-m-app/6.png"
 ---
