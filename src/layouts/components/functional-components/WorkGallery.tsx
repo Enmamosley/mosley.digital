@@ -8,6 +8,9 @@ interface Props {
 const WorkGallery: React.FC<Props> = ({ images, alt }) => {
   const [current, setCurrent] = useState(0);
   const [animKey, setAnimKey] = useState(0);
+  // Las apaisadas llenan el contenedor (object-cover); las verticales
+  // (capturas de teléfono) se muestran completas con object-contain.
+  const [isLandscape, setIsLandscape] = useState(true);
   const thumbsRef = useRef<HTMLDivElement>(null);
 
   const goTo = (index: number) => {
@@ -34,7 +37,13 @@ const WorkGallery: React.FC<Props> = ({ images, alt }) => {
             key={animKey}
             src={images[current]}
             alt={`${alt} ${current + 1}`}
-            className="gallery-image-active w-full h-full object-contain"
+            onLoad={(e) => {
+              const img = e.currentTarget;
+              setIsLandscape(img.naturalWidth >= img.naturalHeight);
+            }}
+            className={`gallery-image-active w-full h-full ${
+              isLandscape ? "object-cover" : "object-contain"
+            }`}
           />
 
           {/* Left arrow */}
