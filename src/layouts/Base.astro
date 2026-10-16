@@ -27,6 +27,7 @@ export interface Props {
   meta_title?: string;
   description?: string;
   image?: string;
+  og_image?: string;
   noindex?: boolean;
   canonical?: string;
   date?: Date;
@@ -34,8 +35,17 @@ export interface Props {
 }
 
 // destructure frontmatter
-const { title, meta_title, description, image, noindex, canonical, date, tags } =
-  Astro.props;
+const {
+  title,
+  meta_title,
+  description,
+  image,
+  og_image,
+  noindex,
+  canonical,
+  date,
+  tags,
+} = Astro.props;
 const gtmId = import.meta.env.PUBLIC_GTM_ID || config.google_tag_manager.gtm_id;
 const gtmEnabled =
   config.google_tag_manager.enable &&
@@ -52,9 +62,14 @@ const pageDescription = plainify(
   description ? description : config.metadata.meta_description,
 ).trim();
 
-// absolute image URL for OG/Twitter — ensure leading slash so it resolves
+// absolute image URL for OG/Twitter — og_image (arte 1200x630) si existe,
+// si no la imagen de la página. Ensure leading slash so it resolves
 // against the site root (config.meta_image has no leading slash)
-const rawImage = image ? image : config.metadata.meta_image;
+const rawImage = og_image
+  ? og_image
+  : image
+    ? image
+    : config.metadata.meta_image;
 const ogImageUrl = `${siteUrl}${rawImage.startsWith("/") ? rawImage : `/${rawImage}`}`;
 
 const isArticle = !!date;

@@ -179,6 +179,7 @@ export const workSinglePage = defineCollection({
     ...commonFields,
     subtitle: z.string(),
     color_shape: z.string(),
+    og_image: z.string().optional(),
     category: z.enum([
       "sitios-web",
       "tiendas-en-linea",

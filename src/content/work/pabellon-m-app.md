@@ -3,7 +3,8 @@ title: "Pabellón M — App de Gestión Interna"
 subtitle: El equipo operativo del centro comercial Pabellón M gestionaba soporte, limpieza y accesos con grupos de WhatsApp y hojas de cálculo dispersas. Desarrollamos una app móvil nativa iOS y Android con Expo que unifica tickets de soporte, inventario de activos, folios de acceso con QR, módulo de RH y programación de limpieza por zonas — todo en tiempo real para el personal en piso.
 meta_title: "Pabellón M App — Sistema de Gestión Interna iOS y Android | Mosley Digital Services"
 description: "App móvil interna para centro comercial: tickets de soporte, inventario, folios de acceso QR, RH y programación de limpieza. Expo + React Native."
-image: "/images/work/pabellon-m-app/1.png"
+image: "/images/work/pabellon-m-app/portada.png"
+og_image: "/images/work/pabellon-m-app/og.png"
 draft: false
 weight: 6
 featured: true
@@ -22,4 +23,9 @@ project_gallery_images:
   - "/images/work/pabellon-m-app/4.png"
   - "/images/work/pabellon-m-app/5.png"
   - "/images/work/pabellon-m-app/6.png"
+  - "/images/work/pabellon-m-app/7.png"
+  - "/images/work/pabellon-m-app/8.png"
+  - "/images/work/pabellon-m-app/9.png"
+  - "/images/work/pabellon-m-app/10.png"
+  - "/images/work/pabellon-m-app/11.png"
 ---
